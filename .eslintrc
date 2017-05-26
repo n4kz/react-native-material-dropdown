@@ -1,6 +1,10 @@
 {
   'parser': 'babel-eslint',
 
+  'globals': {
+    'setTimeout': true,
+  },
+
   'plugins': [
     'react',
   ],
