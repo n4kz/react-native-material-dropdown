@@ -1,0 +1,37 @@
+{
+  "name": "react-native-material-dropdown",
+  "version": "0.0.0",
+  "license": "BSD-3-Clause",
+  "author": "Alexander Nazarov <n4kz@n4kz.com>",
+
+  "description": "Material dropdown",
+  "keywords": ["react", "react-component", "react-native", "ios", "android", "dropdown", "material"],
+
+  "main": "index.js",
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/n4kz/react-native-material-dropdown.git"
+  },
+
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+
+  "devDependencies": {
+    "babel-eslint": "^7.2.0",
+    "eslint": "^3.18.0",
+    "eslint-plugin-react": "^7.0.0"
+  },
+
+  "scripts": {
+    "lint": "node_modules/.bin/eslint src"
+  },
+
+  "dependencies": {
+    "prop-types": "^15.5.9",
+    "react-native-material-buttons": "^0.4.0",
+    "react-native-material-textfield": "^0.5.0"
+  }
+}
