@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
   accessory: {
@@ -28,18 +28,25 @@ export default StyleSheet.create({
   },
 
   picker: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgb(255, 255, 255)',
     borderRadius: 2,
     minHeight: 36 + 16,
     maxHeight: (36 * 5) + 16 - 24,
 
     position: 'absolute',
 
-    shadowColor: 'rgb(0, 0, 0)',
-    shadowOpacity: 0.54,
-    shadowRadius: 2,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 4,
+    ...Platform.select({
+      ios: {
+        shadowRadius: 2,
+        shadowColor: 'rgba(0, 0, 0, 1.0)',
+        shadowOpacity: 0.54,
+        shadowOffset: { width: 0, height: 2 },
+      },
+
+      android: {
+        elevation: 2,
+      },
+    }),
 
     transform: [{
       translateY: -36 - 8,
