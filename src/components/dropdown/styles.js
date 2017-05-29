@@ -30,8 +30,6 @@ export default StyleSheet.create({
   picker: {
     backgroundColor: 'rgb(255, 255, 255)',
     borderRadius: 2,
-    minHeight: 36 + 16,
-    maxHeight: (36 * 5) + 16 - 24,
 
     position: 'absolute',
 
@@ -47,10 +45,6 @@ export default StyleSheet.create({
         elevation: 2,
       },
     }),
-
-    transform: [{
-      translateY: -36 - 8,
-    }],
   },
 
   scroll: {
@@ -63,8 +57,7 @@ export default StyleSheet.create({
   },
 
   item: {
-    height: 36,
-    paddingHorizontal: 8,
+    padding: 8,
     borderRadius: 0,
     justifyContent: 'center',
   },

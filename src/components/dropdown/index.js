@@ -62,7 +62,7 @@ export default class Dropdown extends PureComponent {
 
   onPress() {
     let { value } = this.state;
-    let { data, onFocus } = this.props;
+    let { data, fontSize, onFocus } = this.props;
 
     let offset = 0;
 
@@ -79,7 +79,7 @@ export default class Dropdown extends PureComponent {
         );
 
       if (~index) {
-        offset = (index - 1) * 36;
+        offset = (index - 1) * (fontSize * 1.5 + 16);
       }
     }
 
@@ -90,7 +90,7 @@ export default class Dropdown extends PureComponent {
         return {
           modal: true,
           width: width + 16,
-          top: Platform.select({ ios: y + 1, android: y }) + 26,
+          top: y + Platform.select({ ios: 1, android: 0 }) + 24,
           left: x - 8,
           offset,
         };
@@ -163,11 +163,15 @@ export default class Dropdown extends PureComponent {
   renderItems() {
     let { data = [], baseColor, fontSize, animationDuration } = this.props;
 
+    let itemStyle = {
+      height: fontSize * 1.5 + 16,
+    };
+
     return data
       .map(({ value }, index) => (
         <Button
           color='transparent'
-          style={styles.item}
+          style={[styles.item, itemStyle]}
           rippleContainerBorderRadius={0}
           rippleDuration={animationDuration * 2}
           rippleColor={baseColor}
@@ -185,8 +189,10 @@ export default class Dropdown extends PureComponent {
   render() {
     let { value, left, top, width, opacity, modal } = this.state;
     let { overlayColor, ...props } = this.props;
+    let { fontSize } = props;
 
     let dimensions = Dimensions.get('window');
+    let itemSize = fontSize * 1.5 + 16;
 
     let overlayStyle = {
       width: dimensions.width,
@@ -199,6 +205,11 @@ export default class Dropdown extends PureComponent {
       top,
       left,
       opacity,
+      minHeight: itemSize + 16,
+      maxHeight: (itemSize * 5) + 16 - 24,
+      transform: [{
+        translateY: -(itemSize + 8),
+      }],
     };
 
     return (
