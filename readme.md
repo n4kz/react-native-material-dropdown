@@ -12,12 +12,13 @@ Material dropdown with consistent behaviour on iOS and Android
 
 ## Roadmap
 
-* [ ] Ripple animation on press
+* [x] Ripple animation on press
 * [ ] Fade in animation
 * [x] Fade out animation
 * [x] `focus()` and `blur()` support
 * [ ] Dynamic dropdown position
 * [ ] Dynamic dropdown size
+* [x] Dynamic dropdown item size
 * [ ] Support external value updates
 * [ ] Basic styling for list items
 * [ ] Highlight selected item
