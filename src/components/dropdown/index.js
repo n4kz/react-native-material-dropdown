@@ -117,7 +117,6 @@ export default class Dropdown extends PureComponent {
     Animated
       .timing(opacity, {
         duration: animationDuration,
-        easing: Easing.out(Easing.ease),
         toValue: 0,
       })
       .start(() => {
