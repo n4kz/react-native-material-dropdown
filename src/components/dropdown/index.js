@@ -4,6 +4,8 @@ import {
   Text,
   View,
   ScrollView,
+  Animated,
+  Easing,
   Modal,
   TouchableWithoutFeedback,
   Dimensions,
@@ -45,8 +47,9 @@ export default class Dropdown extends PureComponent {
     this.focus = this.onPress;
 
     this.state = {
-      value: this.props.value,
+      opacity: new Animated.Value(1),
       offset: 0,
+      value: this.props.value,
       modal: false,
     };
   }
@@ -75,12 +78,16 @@ export default class Dropdown extends PureComponent {
     }
 
     this.container.measureInWindow((x, y, width, height) => {
-      this.setState({
-        modal: true,
-        width: width + 16,
-        top: Platform.select({ ios: y + 1, android: y }) + 26,
-        left: x - 8,
-        offset,
+      this.setState(({ opacity }) => {
+        opacity.setValue(1);
+
+        return {
+          modal: true,
+          width: width + 16,
+          top: Platform.select({ ios: y + 1, android: y }) + 26,
+          left: x - 8,
+          offset,
+        };
       });
 
       if ('function' === typeof onFocus) {
@@ -90,17 +97,26 @@ export default class Dropdown extends PureComponent {
   }
 
   onClose() {
-    let { onBlur } = this.props;
+    let { onBlur, animationDuration } = this.props;
+    let { opacity } = this.state;
 
-    if ('function' === typeof onBlur) {
-      onBlur();
-    }
+    Animated
+      .timing(opacity, {
+        duration: animationDuration,
+        easing: Easing.out(Easing.ease),
+        toValue: 0,
+      })
+      .start(() => {
+        if ('function' === typeof onBlur) {
+          onBlur();
+        }
 
-    this.setState({ modal: false });
+        this.setState({ modal: false });
+      });
   }
 
   onSelect(index) {
-    let { data, onChangeText } = this.props;
+    let { data, onChangeText, animationDuration } = this.props;
     let { value } = data[index];
 
     if ('function' === typeof onChangeText) {
@@ -109,7 +125,7 @@ export default class Dropdown extends PureComponent {
 
     this.setState({ value });
 
-    setTimeout(this.onClose, 400);
+    setTimeout(this.onClose, animationDuration);
   }
 
   updateRef(name, ref) {
@@ -139,14 +155,18 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItems() {
-    let { data } = this.props;
+    let { data, baseColor, animationDuration } = this.props;
 
     return data
       .map(({ value }, index) => (
         <Button
-          color='white'
+          color='transparent'
           style={styles.item}
           rippleContainerBorderRadius={0}
+          rippleDuration={animationDuration * 2}
+          rippleColor={baseColor}
+          rippleOpacity={0.54}
+          shadeColor={baseColor}
           shadeBorderRadius={0}
           onPress={() => this.onSelect(index)}
           key={index}
@@ -157,12 +177,12 @@ export default class Dropdown extends PureComponent {
   }
 
   render() {
-    let { value, left, top, width, modal } = this.state;
+    let { value, left, top, width, opacity, modal } = this.state;
     let { data, onChangeText, overlayColor, ...props } = this.props;
 
     let dimensions = Dimensions.get('window');
 
-    let modalStyle = {
+    let overlayStyle = {
       width: dimensions.width,
       height: dimensions.height,
       backgroundColor: overlayColor,
@@ -172,6 +192,7 @@ export default class Dropdown extends PureComponent {
       width,
       top,
       left,
+      opacity,
     };
 
     return (
@@ -190,8 +211,8 @@ export default class Dropdown extends PureComponent {
 
         <Modal visible={modal} transparent={true} onRequestClose={this.onClose}>
           <TouchableWithoutFeedback onPress={this.onClose}>
-            <View style={modalStyle}>
-              <View style={[styles.picker, pickerStyle]}>
+            <View style={overlayStyle}>
+              <Animated.View style={[styles.picker, pickerStyle]}>
                 <ScrollView
                   ref={this.updateScrollRef}
                   style={styles.scroll}
@@ -199,7 +220,7 @@ export default class Dropdown extends PureComponent {
                 >
                   {this.renderItems()}
                 </ScrollView>
-              </View>
+              </Animated.View>
             </View>
           </TouchableWithoutFeedback>
         </Modal>
