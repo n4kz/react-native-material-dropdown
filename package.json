@@ -32,6 +32,7 @@
   "dependencies": {
     "prop-types": "^15.5.9",
     "react-native-material-buttons": "^0.4.0",
+    "react-native-material-ripple": "^0.7.0",
     "react-native-material-textfield": "^0.5.0"
   }
 }

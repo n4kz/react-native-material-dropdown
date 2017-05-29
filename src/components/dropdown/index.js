@@ -11,6 +11,7 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
+import Ripple from 'react-native-material-ripple';
 import { Button } from 'react-native-material-buttons';
 import { TextField } from 'react-native-material-textfield';
 
@@ -39,6 +40,7 @@ export default class Dropdown extends PureComponent {
 
     this.onPress = this.onPress.bind(this);
     this.onClose = this.onClose.bind(this);
+    this.updateRippleRef = this.updateRef.bind(this, 'ripple');
     this.updateContainerRef = this.updateRef.bind(this, 'container');
     this.updateScrollRef = this.updateRef.bind(this, 'scroll');
     this.renderAccessory = this.renderAccessory.bind(this);
@@ -60,11 +62,17 @@ export default class Dropdown extends PureComponent {
     return this.state.modal;
   }
 
-  onPress() {
+  onPress(event) {
     let { value } = this.state;
     let { data, fontSize, onFocus } = this.props;
 
     let offset = 0;
+
+    /* Adjust event location */
+    event.nativeEvent.locationY -= 16;
+
+    /* Start ripple directly from event */
+    this.ripple.startRipple(event);
 
     if (!data.length) {
       return;
@@ -189,7 +197,7 @@ export default class Dropdown extends PureComponent {
   render() {
     let { value, left, top, width, opacity, modal } = this.state;
     let { overlayColor, ...props } = this.props;
-    let { fontSize } = props;
+    let { fontSize, baseColor, animationDuration } = props;
 
     let dimensions = Dimensions.get('window');
     let itemSize = fontSize * 1.5 + 16;
@@ -212,6 +220,14 @@ export default class Dropdown extends PureComponent {
       }],
     };
 
+    let rippleStyle = {
+      position: 'absolute',
+      top: 16,
+      left: 0,
+      right: 0,
+      height: fontSize * 1.5 + 16 + 8,
+    };
+
     return (
       <View onLayout={() => undefined} ref={this.updateContainerRef}>
         <TouchableWithoutFeedback onPress={this.onPress}>
@@ -223,6 +239,15 @@ export default class Dropdown extends PureComponent {
               editable={false}
               onChangeText={undefined}
               renderAccessory={this.renderAccessory}
+            />
+
+            <Ripple
+              style={rippleStyle}
+              rippleColor={baseColor}
+              rippleDuration={animationDuration * 2}
+              rippleOpacity={0.54}
+              rippleSequential={true}
+              ref={this.updateRippleRef}
             />
           </View>
         </TouchableWithoutFeedback>
