@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   Animated,
-  Easing,
   Modal,
   TouchableWithoutFeedback,
   Dimensions,
@@ -51,7 +50,7 @@ export default class Dropdown extends PureComponent {
     let { value } = this.props;
 
     this.state = {
-      opacity: new Animated.Value(1),
+      opacity: new Animated.Value(0),
       offset: 0,
       modal: false,
       value,
@@ -64,9 +63,10 @@ export default class Dropdown extends PureComponent {
 
   onPress(event) {
     let { value } = this.state;
-    let { data, fontSize, onFocus } = this.props;
+    let { data, fontSize, onFocus, animationDuration } = this.props;
 
     let offset = 0;
+    let timestamp = Date.now();
 
     /* Adjust event location */
     event.nativeEvent.locationY -= 16;
@@ -91,22 +91,29 @@ export default class Dropdown extends PureComponent {
       }
     }
 
+    if ('function' === typeof onFocus) {
+      onFocus();
+    }
+
     this.container.measureInWindow((x, y, width, height) => {
-      this.setState(({ opacity }) => {
-        opacity.setValue(1);
+      let { opacity } = this.state;
+      let delay = Math.max(0, animationDuration - (Date.now() - timestamp));
 
-        return {
-          modal: true,
-          width: width + 16,
-          top: y + Platform.select({ ios: 1, android: 0 }) + 24,
-          left: x - 8,
-          offset,
-        };
-      });
-
-      if ('function' === typeof onFocus) {
-        onFocus();
-      }
+      Animated
+        .timing(opacity, {
+          duration: animationDuration,
+          toValue: 1,
+          delay,
+        })
+        .start(() => {
+          this.setState({
+            modal: true,
+            width: width + 16,
+            top: y + Platform.select({ ios: 1, android: 0 }) + 24,
+            left: x - 8,
+            offset,
+          });
+        });
     });
   }
 
