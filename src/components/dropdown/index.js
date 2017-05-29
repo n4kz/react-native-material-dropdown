@@ -41,6 +41,9 @@ export default class Dropdown extends PureComponent {
     this.updateScrollRef = this.updateRef.bind(this, 'scroll');
     this.renderAccessory = this.renderAccessory.bind(this);
 
+    this.blur = this.onClose;
+    this.focus = this.onPress;
+
     this.state = {
       value: this.props.value,
       offset: 0,
