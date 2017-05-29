@@ -18,20 +18,20 @@ import styles from './styles';
 
 export default class Dropdown extends PureComponent {
   static defaultProps = {
+    ...TextField.defaultProps,
+
     overlayColor: 'transparent',
   };
 
   static propTypes = {
+    ...TextField.propTypes,
+
     overlayColor: PropTypes.string,
 
     value: PropTypes.string,
     data: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string,
     })),
-
-    onChangeText: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
   };
 
   constructor(props) {
@@ -46,11 +46,13 @@ export default class Dropdown extends PureComponent {
     this.blur = this.onClose;
     this.focus = this.onPress;
 
+    let { value } = this.props;
+
     this.state = {
       opacity: new Animated.Value(1),
       offset: 0,
-      value: this.props.value,
       modal: false,
+      value,
     };
   }
 
@@ -63,6 +65,10 @@ export default class Dropdown extends PureComponent {
     let { data, onFocus } = this.props;
 
     let offset = 0;
+
+    if (!data.length) {
+      return;
+    }
 
     if (value) {
       let index = data
@@ -155,7 +161,7 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItems() {
-    let { data, baseColor, fontSize, animationDuration } = this.props;
+    let { data = [], baseColor, fontSize, animationDuration } = this.props;
 
     return data
       .map(({ value }, index) => (
@@ -178,7 +184,7 @@ export default class Dropdown extends PureComponent {
 
   render() {
     let { value, left, top, width, opacity, modal } = this.state;
-    let { data, onChangeText, overlayColor, ...props } = this.props;
+    let { overlayColor, ...props } = this.props;
 
     let dimensions = Dimensions.get('window');
 
@@ -204,6 +210,7 @@ export default class Dropdown extends PureComponent {
 
               value={value}
               editable={false}
+              onChangeText={undefined}
               renderAccessory={this.renderAccessory}
             />
           </View>
