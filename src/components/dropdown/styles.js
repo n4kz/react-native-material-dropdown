@@ -68,8 +68,4 @@ export default StyleSheet.create({
     borderRadius: 0,
     justifyContent: 'center',
   },
-
-  text: {
-    fontSize: 16,
-  },
 });

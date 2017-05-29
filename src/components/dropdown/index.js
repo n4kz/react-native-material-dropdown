@@ -155,7 +155,7 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItems() {
-    let { data, baseColor, animationDuration } = this.props;
+    let { data, baseColor, fontSize, animationDuration } = this.props;
 
     return data
       .map(({ value }, index) => (
@@ -171,7 +171,7 @@ export default class Dropdown extends PureComponent {
           onPress={() => this.onSelect(index)}
           key={index}
         >
-          <Text style={styles.text}>{value}</Text>
+          <Text style={{ fontSize }}>{value}</Text>
         </Button>
       ));
   }
