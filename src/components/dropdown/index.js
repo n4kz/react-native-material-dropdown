@@ -19,14 +19,10 @@ import styles from './styles';
 export default class Dropdown extends PureComponent {
   static defaultProps = {
     ...TextField.defaultProps,
-
-    overlayColor: 'transparent',
   };
 
   static propTypes = {
     ...TextField.propTypes,
-
-    overlayColor: PropTypes.string,
 
     value: PropTypes.string,
     data: PropTypes.arrayOf(PropTypes.shape({
@@ -202,7 +198,7 @@ export default class Dropdown extends PureComponent {
 
   render() {
     let { value, left, top, width, opacity, modal } = this.state;
-    let { overlayColor, ...props } = this.props;
+    let { data, ...props } = this.props;
     let { fontSize, baseColor, animationDuration } = props;
 
     let dimensions = Dimensions.get('window');
@@ -211,7 +207,6 @@ export default class Dropdown extends PureComponent {
     let overlayStyle = {
       width: dimensions.width,
       height: dimensions.height,
-      backgroundColor: overlayColor,
     };
 
     let pickerStyle = {
