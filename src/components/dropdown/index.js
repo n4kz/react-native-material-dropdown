@@ -53,8 +53,10 @@ export default class Dropdown extends PureComponent {
     };
   }
 
-  isFocused() {
-    return this.state.modal;
+  componentWillReceiveProps({ value }) {
+    if (value !== this.props.value) {
+      this.setState({ value });
+    }
   }
 
   onPress(event) {
@@ -142,6 +144,10 @@ export default class Dropdown extends PureComponent {
     this.setState({ value });
 
     setTimeout(this.onClose, animationDuration);
+  }
+
+  isFocused() {
+    return this.state.modal;
   }
 
   updateRef(name, ref) {
