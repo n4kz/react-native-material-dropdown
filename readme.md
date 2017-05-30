@@ -20,7 +20,7 @@ Material dropdown with consistent behaviour on iOS and Android
 * [ ] Dynamic dropdown position
 * [ ] Dynamic dropdown size
 * [x] Dynamic dropdown item size
-* [ ] Support external value updates
+* [x] Support external value updates
 * [ ] Basic styling for list items
 * [ ] Highlight selected item
 * [ ] Documentation
