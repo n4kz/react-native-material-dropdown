@@ -55,10 +55,4 @@ export default StyleSheet.create({
   scrollContainer: {
     paddingVertical: 8,
   },
-
-  item: {
-    padding: 8,
-    borderRadius: 0,
-    justifyContent: 'center',
-  },
 });

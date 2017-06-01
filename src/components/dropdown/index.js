@@ -11,9 +11,9 @@ import {
   Platform,
 } from 'react-native';
 import Ripple from 'react-native-material-ripple';
-import { Button } from 'react-native-material-buttons';
 import { TextField } from 'react-native-material-textfield';
 
+import DropdownItem from '../item';
 import styles from './styles';
 
 export default class Dropdown extends PureComponent {
@@ -181,26 +181,20 @@ export default class Dropdown extends PureComponent {
   renderItems() {
     let { data = [], baseColor, fontSize, animationDuration } = this.props;
 
-    let itemStyle = {
-      height: fontSize * 1.5 + 16,
+    let props = {
+      animationDuration,
+      baseColor,
+      fontSize,
+      style: {
+        height: fontSize * 1.5 + 16,
+      },
     };
 
     return data
       .map(({ value }, index) => (
-        <Button
-          color='transparent'
-          style={[styles.item, itemStyle]}
-          rippleContainerBorderRadius={0}
-          rippleDuration={animationDuration * 2}
-          rippleColor={baseColor}
-          rippleOpacity={0.54}
-          shadeColor={baseColor}
-          shadeBorderRadius={0}
-          onPress={() => this.onSelect(index)}
-          key={index}
-        >
+        <DropdownItem index={index} key={index} {...props}>
           <Text style={{ fontSize }}>{value}</Text>
-        </Button>
+        </DropdownItem>
       ));
   }
 
