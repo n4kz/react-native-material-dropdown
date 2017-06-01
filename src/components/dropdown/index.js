@@ -60,10 +60,7 @@ export default class Dropdown extends PureComponent {
   }
 
   onPress(event) {
-    let { value } = this.state;
     let { data, fontSize, onFocus, animationDuration } = this.props;
-
-    let offset = 0;
     let timestamp = Date.now();
 
     /* Adjust event location */
@@ -76,19 +73,6 @@ export default class Dropdown extends PureComponent {
       return;
     }
 
-    if (value) {
-      let index = data
-        .indexOf(
-          data
-            .filter((item) => value === item.value)
-            .shift()
-        );
-
-      if (~index) {
-        offset = (index - 1) * (fontSize * 1.5 + 16);
-      }
-    }
-
     if ('function' === typeof onFocus) {
       onFocus();
     }
@@ -96,6 +80,10 @@ export default class Dropdown extends PureComponent {
     this.container.measureInWindow((x, y, width, height) => {
       let { opacity } = this.state;
       let delay = Math.max(0, animationDuration - (Date.now() - timestamp));
+      let index = this.selectedIndex();
+      let offset = ~index?
+        (index - 1) * (fontSize * 1.5 + 16):
+        0;
 
       Animated
         .timing(opacity, {
@@ -148,6 +136,20 @@ export default class Dropdown extends PureComponent {
 
   isFocused() {
     return this.state.modal;
+  }
+
+  selectedIndex() {
+    let { data = [] } = this.props;
+
+    return data
+      .findIndex(({ value }) => value === this.state.value);
+  }
+
+  selectedItem() {
+    let { data = [] } = this.props;
+
+    return data
+      .find(({ value }) => value === this.state.value);
   }
 
   updateRef(name, ref) {
