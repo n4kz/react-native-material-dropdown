@@ -27,14 +27,21 @@ export default class Dropdown extends PureComponent {
   };
 
   static propTypes = {
-    ...TextField.propTypes,
+    animationDuration: PropTypes.number,
+    fontSize: PropTypes.number,
 
     value: PropTypes.string,
     data: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string,
     })),
 
+    textColor: PropTypes.string,
     itemColor: PropTypes.string,
+    baseColor: PropTypes.string,
+
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onChangeText: PropTypes.func,
   };
 
   constructor(props) {
