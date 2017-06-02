@@ -205,9 +205,8 @@ export default class Dropdown extends PureComponent {
   }
 
   renderAccessory() {
-    let triangleStyle = {
-      backgroundColor: TextField.defaultProps.baseColor,
-    };
+    let { baseColor: backgroundColor } = this.props;
+    let triangleStyle = { backgroundColor };
 
     return (
       <View style={styles.accessory}>
