@@ -17,11 +17,12 @@ Material dropdown with consistent behaviour on iOS and Android
 * [x] Fade in animation
 * [x] Fade out animation
 * [x] `focus()` and `blur()` support
-* [ ] Dynamic dropdown position
-* [ ] Dynamic dropdown size
+* [x] Dynamic dropdown position
+* [x] Dynamic dropdown size
 * [x] Dynamic dropdown item size
 * [x] Support external value updates
 * [x] Highlight selected item
+* [ ] Configurable visible item count
 * [ ] Documentation
 * [ ] Example
 
