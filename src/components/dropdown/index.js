@@ -75,7 +75,7 @@ export default class Dropdown extends PureComponent {
   }
 
   onPress(event) {
-    let { data = [], fontSize, onFocus, animationDuration } = this.props;
+    let { data = [], onFocus, animationDuration } = this.props;
 
     let itemCount = data.length;
     let visibleItemCount = this.visibleItemCount();
@@ -286,9 +286,7 @@ export default class Dropdown extends PureComponent {
 
       case itemCount - 1:
       case itemCount - 2:
-        let rindex = itemCount - selected;
-
-        translateY -= (visibleItemCount - rindex) * itemSize
+        translateY -= (visibleItemCount - (itemCount - selected)) * itemSize;
         break;
 
       default:
