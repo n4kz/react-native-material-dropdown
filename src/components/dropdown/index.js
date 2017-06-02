@@ -22,6 +22,7 @@ export default class Dropdown extends PureComponent {
     fontSize: 16,
 
     textColor: 'rgba(0, 0, 0, .87)',
+    itemColor: 'rgba(0, 0, 0, .54)',
     baseColor: 'rgba(0, 0, 0, .38)',
   };
 
@@ -32,6 +33,8 @@ export default class Dropdown extends PureComponent {
     data: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string,
     })),
+
+    itemColor: PropTypes.string,
   };
 
   constructor(props) {
@@ -103,6 +106,7 @@ export default class Dropdown extends PureComponent {
             top: y + Platform.select({ ios: 1, android: 0 }) + 24,
             left: x - 8,
             offset,
+            selected: index,
           });
         });
     });
@@ -184,9 +188,12 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItems() {
+    let { selected } = this.state;
+
     let {
       data = [],
-      textColor: color,
+      textColor,
+      itemColor,
       baseColor,
       fontSize,
       animationDuration,
@@ -203,11 +210,19 @@ export default class Dropdown extends PureComponent {
     };
 
     return data
-      .map(({ value }, index) => (
-        <DropdownItem index={index} key={index} {...props}>
-          <Text style={{ color, fontSize }}>{value}</Text>
-        </DropdownItem>
-      ));
+      .map(({ value }, index) => {
+        let color = ~selected?
+          index === selected?
+            textColor:
+            itemColor:
+          textColor;
+
+        return (
+          <DropdownItem index={index} key={index} {...props}>
+            <Text style={{ color, fontSize }}>{value}</Text>
+          </DropdownItem>
+        );
+      });
   }
 
   render() {
