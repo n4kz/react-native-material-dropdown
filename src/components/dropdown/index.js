@@ -39,6 +39,7 @@ export default class Dropdown extends PureComponent {
 
     this.onPress = this.onPress.bind(this);
     this.onClose = this.onClose.bind(this);
+    this.onSelect = this.onSelect.bind(this);
     this.updateRippleRef = this.updateRef.bind(this, 'ripple');
     this.updateContainerRef = this.updateRef.bind(this, 'container');
     this.updateScrollRef = this.updateRef.bind(this, 'scroll');
@@ -195,6 +196,7 @@ export default class Dropdown extends PureComponent {
       animationDuration,
       baseColor,
       fontSize,
+      onPress: this.onSelect,
       style: {
         height: fontSize * 1.5 + 16,
       },
