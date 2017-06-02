@@ -121,7 +121,7 @@ export default class Dropdown extends PureComponent {
       this.setState({
         modal: true,
         width: width + 16,
-        top: y + Platform.select({ ios: 1, android: 0 }) + 24,
+        top: y + Platform.select({ ios: 1, android: 2 }) + 24,
         left: x - 8,
         selected,
       });
