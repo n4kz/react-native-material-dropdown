@@ -62,7 +62,7 @@ export default class Dropdown extends PureComponent {
 
     this.state = {
       opacity: new Animated.Value(0),
-      offset: 0,
+      selected: -1,
       modal: false,
       value,
     };
@@ -75,7 +75,10 @@ export default class Dropdown extends PureComponent {
   }
 
   onPress(event) {
-    let { data, fontSize, onFocus, animationDuration } = this.props;
+    let { data = [], fontSize, onFocus, animationDuration } = this.props;
+
+    let itemCount = data.length;
+    let visibleItemCount = this.visibleItemCount();
     let timestamp = Date.now();
 
     /* Adjust event location */
@@ -84,7 +87,7 @@ export default class Dropdown extends PureComponent {
     /* Start ripple directly from event */
     this.ripple.startRipple(event);
 
-    if (!data.length) {
+    if (!itemCount) {
       return;
     }
 
@@ -94,28 +97,45 @@ export default class Dropdown extends PureComponent {
 
     this.container.measureInWindow((x, y, width, height) => {
       let { opacity } = this.state;
-      let delay = Math.max(0, animationDuration - (Date.now() - timestamp));
-      let index = this.selectedIndex();
-      let offset = ~index?
-        (index - 1) * (fontSize * 1.5 + 16):
-        0;
 
-      Animated
-        .timing(opacity, {
-          duration: animationDuration,
-          toValue: 1,
-          delay,
-        })
-        .start(() => {
-          this.setState({
-            modal: true,
-            width: width + 16,
-            top: y + Platform.select({ ios: 1, android: 0 }) + 24,
-            left: x - 8,
-            offset,
-            selected: index,
-          });
-        });
+      let delay = Math.max(0, animationDuration - (Date.now() - timestamp));
+      let selected = this.selectedIndex();
+      let offset = 0;
+
+      if (itemCount > visibleItemCount) {
+        switch (selected) {
+          case 0:
+          case 1:
+            break;
+
+          case itemCount - 1:
+          case itemCount - 2:
+            offset = this.itemSize() * (itemCount - 4);
+            break;
+
+          default:
+            offset = this.itemSize() * (selected - 1);
+        }
+      }
+
+      this.setState({
+        modal: true,
+        width: width + 16,
+        top: y + Platform.select({ ios: 1, android: 0 }) + 24,
+        left: x - 8,
+        selected,
+      });
+
+      setTimeout((() => {
+        this.scroll.scrollTo({ x: 0, y: offset, animated: false });
+
+        Animated
+          .timing(opacity, {
+            duration: animationDuration,
+            toValue: 1,
+          })
+          .start();
+      }), delay);
     });
   }
 
@@ -168,16 +188,20 @@ export default class Dropdown extends PureComponent {
       .find(({ value }) => value === this.state.value);
   }
 
+  itemSize() {
+    let { fontSize } = this.props;
+
+    return fontSize * 1.5 + 16;
+  }
+
+  visibleItemCount() {
+    let { data = [] } = this.props;
+
+    return Math.min(data.length, 4);
+  }
+
   updateRef(name, ref) {
     this[name] = ref;
-
-    /* XXX: Initial position for ScrollView */
-    /* FIXME: Android */
-    if ('scroll' === name && ref) {
-      let { offset } = this.state;
-
-      ref.scrollTo({ x: 0, y: offset, animated: false });
-    }
   }
 
   renderAccessory() {
@@ -233,28 +257,51 @@ export default class Dropdown extends PureComponent {
   }
 
   render() {
-    let { value, left, top, width, opacity, modal } = this.state;
-    let { data, ...props } = this.props;
+    let { value, left, top, width, opacity, selected, modal } = this.state;
+    let { data = [], ...props } = this.props;
     let { fontSize, baseColor, animationDuration } = props;
 
     let dimensions = Dimensions.get('window');
-    let itemSize = fontSize * 1.5 + 16;
+
+    let itemCount = data.length;
+    let visibleItemCount = this.visibleItemCount();
+    let itemSize = this.itemSize();
 
     let overlayStyle = {
       width: dimensions.width,
       height: dimensions.height,
     };
 
+		let height = 16 + itemSize * visibleItemCount;
+
+    let translateY = -8;
+
+    switch (selected) {
+      case -1:
+        translateY -= 1 === itemCount? 0 : itemSize;
+        break;
+
+      case 0:
+        break;
+
+      case itemCount - 1:
+      case itemCount - 2:
+        let rindex = itemCount - selected;
+
+        translateY -= (visibleItemCount - rindex) * itemSize
+        break;
+
+      default:
+        translateY -= itemSize;
+    }
+
     let pickerStyle = {
       width,
+      height,
       top,
       left,
       opacity,
-      minHeight: itemSize + 16,
-      maxHeight: (itemSize * 5) + 16 - 24,
-      transform: [{
-        translateY: -(itemSize + 8),
-      }],
+      transform: [{ translateY }],
     };
 
     let rippleStyle = {
