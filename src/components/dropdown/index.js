@@ -21,6 +21,7 @@ export default class Dropdown extends PureComponent {
     animationDuration: 225,
     fontSize: 16,
 
+    textColor: 'rgba(0, 0, 0, .87)',
     baseColor: 'rgba(0, 0, 0, .38)',
   };
 
@@ -182,7 +183,13 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItems() {
-    let { data = [], baseColor, fontSize, animationDuration } = this.props;
+    let {
+      data = [],
+      textColor: color,
+      baseColor,
+      fontSize,
+      animationDuration,
+    } = this.props;
 
     let props = {
       animationDuration,
@@ -196,7 +203,7 @@ export default class Dropdown extends PureComponent {
     return data
       .map(({ value }, index) => (
         <DropdownItem index={index} key={index} {...props}>
-          <Text style={{ fontSize }}>{value}</Text>
+          <Text style={{ color, fontSize }}>{value}</Text>
         </DropdownItem>
       ));
   }
