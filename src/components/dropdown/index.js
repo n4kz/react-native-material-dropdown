@@ -18,7 +18,10 @@ import styles from './styles';
 
 export default class Dropdown extends PureComponent {
   static defaultProps = {
-    ...TextField.defaultProps,
+    animationDuration: 225,
+    fontSize: 16,
+
+    baseColor: 'rgba(0, 0, 0, .38)',
   };
 
   static propTypes = {
