@@ -13,10 +13,17 @@ export default class DropdownItem extends PureComponent {
   };
 
   static propTypes = {
-    ...Button.propTypes,
+    style: PropTypes.object,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+    ]),
+
+    onPress: PropTypes.func,
 
     index: PropTypes.number.isRequired,
     baseColor: PropTypes.string.isRequired,
+    animationDuration: PropTypes.number,
   };
 
   constructor(props) {
