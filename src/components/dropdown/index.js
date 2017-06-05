@@ -18,6 +18,9 @@ import styles from './styles';
 
 export default class Dropdown extends PureComponent {
   static defaultProps = {
+    rippleOpacity: 0.54,
+    shadeOpacity: 0.12,
+
     animationDuration: 225,
     fontSize: 16,
 
@@ -29,6 +32,9 @@ export default class Dropdown extends PureComponent {
   };
 
   static propTypes = {
+    rippleOpacity: PropTypes.number,
+    shadeOpacity: PropTypes.number,
+
     animationDuration: PropTypes.number,
     fontSize: PropTypes.number,
 
@@ -235,12 +241,16 @@ export default class Dropdown extends PureComponent {
       baseColor,
       fontSize,
       animationDuration,
+      rippleOpacity,
+      shadeOpacity,
     } = this.props;
 
     let props = {
-      animationDuration,
       baseColor,
       fontSize,
+      animationDuration,
+      rippleOpacity,
+      shadeOpacity,
       onPress: this.onSelect,
       style: {
         height: fontSize * 1.5 + 16,
@@ -265,7 +275,7 @@ export default class Dropdown extends PureComponent {
 
   render() {
     let { value, left, top, width, opacity, selected, modal } = this.state;
-    let { data = [], ...props } = this.props;
+    let { data = [], rippleOpacity, ...props } = this.props;
     let { fontSize, baseColor, animationDuration } = props;
 
     let dimensions = Dimensions.get('window');
@@ -280,7 +290,7 @@ export default class Dropdown extends PureComponent {
       height: dimensions.height,
     };
 
-		let height = 16 + itemSize * visibleItemCount;
+    let height = 16 + itemSize * visibleItemCount;
     let translateY = -8;
 
     switch (selected) {
@@ -333,7 +343,7 @@ export default class Dropdown extends PureComponent {
               style={rippleStyle}
               rippleColor={baseColor}
               rippleDuration={animationDuration * 2}
-              rippleOpacity={0.54}
+              rippleOpacity={rippleOpacity}
               rippleSequential={true}
               ref={this.updateRippleRef}
             />
