@@ -31,7 +31,33 @@ Material dropdown with consistent behaviour on iOS and Android
 ## Installation
 
 ```bash
-npm install --save react-native-material-textfield
+npm install --save react-native-material-dropdown
+```
+
+## Usage
+
+```javascript
+import React, { Component } from 'react';
+import { Dropdown } from 'react-native-material-dropdown';
+
+class Example extends Component {
+  render() {
+    let data = [{
+      value: 'Banana',
+    }, {
+      value: 'Mango',
+    }, {
+      value: 'Pear',
+    }];
+
+    return (
+      <Dropdown
+        label='Favorite Fruit'
+        data={data}
+      />
+    );
+  }
+}
 ```
 
 ## Properties
