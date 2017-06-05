@@ -110,7 +110,7 @@ export default class Dropdown extends PureComponent {
 
           case itemCount - 1:
           case itemCount - 2:
-            offset = this.itemSize() * (itemCount - 4);
+            offset = this.itemSize() * (itemCount - visibleItemCount);
             break;
 
           default:
