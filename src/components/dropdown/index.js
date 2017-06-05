@@ -24,6 +24,8 @@ export default class Dropdown extends PureComponent {
     textColor: 'rgba(0, 0, 0, .87)',
     itemColor: 'rgba(0, 0, 0, .54)',
     baseColor: 'rgba(0, 0, 0, .38)',
+
+    itemCount: 4,
   };
 
   static propTypes = {
@@ -38,6 +40,8 @@ export default class Dropdown extends PureComponent {
     textColor: PropTypes.string,
     itemColor: PropTypes.string,
     baseColor: PropTypes.string,
+
+    itemCount: PropTypes.number,
 
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -79,6 +83,7 @@ export default class Dropdown extends PureComponent {
 
     let itemCount = data.length;
     let visibleItemCount = this.visibleItemCount();
+    let tailItemCount = this.tailItemCount();
     let timestamp = Date.now();
 
     /* Adjust event location */
@@ -108,13 +113,12 @@ export default class Dropdown extends PureComponent {
           case 1:
             break;
 
-          case itemCount - 1:
-          case itemCount - 2:
-            offset = this.itemSize() * (itemCount - visibleItemCount);
-            break;
-
           default:
-            offset = this.itemSize() * (selected - 1);
+            if (selected >= itemCount - tailItemCount) {
+              offset = this.itemSize() * (itemCount - visibleItemCount);
+            } else {
+              offset = this.itemSize() * (selected - 1);
+            }
         }
       }
 
@@ -195,9 +199,13 @@ export default class Dropdown extends PureComponent {
   }
 
   visibleItemCount() {
-    let { data = [] } = this.props;
+    let { data = [], itemCount } = this.props;
 
-    return Math.min(data.length, 4);
+    return Math.min(data.length, itemCount);
+  }
+
+  tailItemCount() {
+    return Math.max(this.visibleItemCount() - 2, 0);
   }
 
   updateRef(name, ref) {
@@ -264,6 +272,7 @@ export default class Dropdown extends PureComponent {
 
     let itemCount = data.length;
     let visibleItemCount = this.visibleItemCount();
+    let tailItemCount = this.tailItemCount();
     let itemSize = this.itemSize();
 
     let overlayStyle = {
@@ -272,7 +281,6 @@ export default class Dropdown extends PureComponent {
     };
 
 		let height = 16 + itemSize * visibleItemCount;
-
     let translateY = -8;
 
     switch (selected) {
@@ -283,13 +291,12 @@ export default class Dropdown extends PureComponent {
       case 0:
         break;
 
-      case itemCount - 1:
-      case itemCount - 2:
-        translateY -= (visibleItemCount - (itemCount - selected)) * itemSize;
-        break;
-
       default:
-        translateY -= itemSize;
+        if (selected >= itemCount - tailItemCount) {
+          translateY -= (visibleItemCount - (itemCount - selected)) * itemSize;
+        } else {
+          translateY -= itemSize;
+        }
     }
 
     let pickerStyle = {
