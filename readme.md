@@ -24,7 +24,7 @@ Material dropdown with consistent behaviour on iOS and Android
 * [x] Dynamic dropdown item size
 * [x] Support external value updates
 * [x] Highlight selected item
-* [ ] Configurable visible item count
+* [x] Configurable item count
 * [ ] Documentation
 * [ ] Example
 
@@ -70,7 +70,8 @@ class Example extends Component {
  baseColor            | Text field base color                       |   String | rgba(0, 0, 0, .38)
  itemColor            | Dropdown item text color (inactive items)   |   String | rgba(0, 0, 0, .54)
  textColor            | Dropdown item text color (active item)      |   String | rgba(0, 0, 0, .87)
- data                 | Dropdown items                              |   Object | -
+ itemCount            | Dropdown visible item count                 |   Number | 4
+ data                 | Dropdown item data                          |   Object | -
  value                | Selected value                              |   String | -
 
 Other [TextField][textfield] and [TextInput][textinput] properties will also work
