@@ -106,6 +106,10 @@ export default class Dropdown extends PureComponent {
       onFocus();
     }
 
+    let dimensions = Dimensions.get('window');
+    let minMargin = 8;
+    let maxMargin = 16;
+
     this.container.measureInWindow((x, y, width, height) => {
       let { opacity } = this.state;
 
@@ -128,11 +132,14 @@ export default class Dropdown extends PureComponent {
         }
       }
 
+      let left = Math.max(minMargin, x - maxMargin);
+      let right = Math.min(dimensions.width - minMargin, x + width + maxMargin);
+
       this.setState({
         modal: true,
-        width: width + 16,
+        width: right - left,
         top: y + Platform.select({ ios: 1, android: 2 }) + 24,
-        left: x - 8,
+        left,
         selected,
       });
 
