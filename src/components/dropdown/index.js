@@ -52,6 +52,8 @@ export default class Dropdown extends PureComponent {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onChangeText: PropTypes.func,
+
+    containerStyle: PropTypes.object,
   };
 
   constructor(props) {
@@ -285,7 +287,7 @@ export default class Dropdown extends PureComponent {
 
   render() {
     let { value, left, top, width, opacity, selected, modal } = this.state;
-    let { data = [], rippleOpacity, ...props } = this.props;
+    let { data = [], rippleOpacity, containerStyle, ...props } = this.props;
     let { fontSize, baseColor, animationDuration } = props;
 
     let dimensions = Dimensions.get('window');
@@ -337,7 +339,7 @@ export default class Dropdown extends PureComponent {
     };
 
     return (
-      <View onLayout={() => undefined} ref={this.updateContainerRef}>
+      <View onLayout={() => undefined} ref={this.updateContainerRef} style={containerStyle}>
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View pointerEvents='box-only'>
             <TextField
