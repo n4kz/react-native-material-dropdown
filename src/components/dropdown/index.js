@@ -119,6 +119,9 @@ export default class Dropdown extends PureComponent {
 
       if (itemCount > visibleItemCount) {
         switch (selected) {
+          case -1:
+            break;
+
           case 0:
           case 1:
             break;
