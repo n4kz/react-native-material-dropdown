@@ -72,6 +72,7 @@ export default class Dropdown extends PureComponent {
 
     let { value } = this.props;
 
+    this.mounted = false;
     this.state = {
       opacity: new Animated.Value(0),
       selected: -1,
@@ -84,6 +85,14 @@ export default class Dropdown extends PureComponent {
     if (value !== this.props.value) {
       this.setState({ value });
     }
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   onPress(event) {
@@ -149,14 +158,17 @@ export default class Dropdown extends PureComponent {
       });
 
       setTimeout((() => {
-        this.scroll.scrollTo({ x: 0, y: offset, animated: false });
+        if (this.mounted) {
+          this.scroll
+            .scrollTo({ x: 0, y: offset, animated: false });
 
-        Animated
-          .timing(opacity, {
-            duration: animationDuration,
-            toValue: 1,
-          })
-          .start();
+          Animated
+            .timing(opacity, {
+              duration: animationDuration,
+              toValue: 1,
+            })
+            .start();
+        }
       }), delay);
     });
   }
@@ -175,7 +187,9 @@ export default class Dropdown extends PureComponent {
           onBlur();
         }
 
-        this.setState({ modal: false });
+        if (this.mounted) {
+          this.setState({ modal: false });
+        }
       });
   }
 
