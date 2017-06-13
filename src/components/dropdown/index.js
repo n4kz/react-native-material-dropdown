@@ -197,11 +197,11 @@ export default class Dropdown extends PureComponent {
     let { data, onChangeText, animationDuration } = this.props;
     let { value } = data[index];
 
+    this.setState({ value });
+
     if ('function' === typeof onChangeText) {
       onChangeText(value, index, data);
     }
-
-    this.setState({ value });
 
     setTimeout(this.onClose, animationDuration);
   }
