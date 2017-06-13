@@ -77,6 +77,17 @@ class Example extends Component {
 
 Other [TextField][textfield] and [TextInput][textinput] properties will also work
 
+## Methods
+
+ name            | description                    | return type
+:--------------- |:------------------------------ | -----------:
+ focus()         | Acquire focus (open dropdown)  |   undefined
+ blur()          | Release focus (close dropdown) |   undefined
+ isFocused()     | Get current focus state        |     Boolean
+ value()         | Get current value              |      String
+ selectedIndex() | Get selected index             |      Number
+ selectedItem()  | Get selected item              |      Object
+
 ## Copyright and License
 
 BSD License
