@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
   Platform,
+  ViewPropTypes,
 } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 import { TextField } from 'react-native-material-textfield';
@@ -53,7 +54,7 @@ export default class Dropdown extends PureComponent {
     onBlur: PropTypes.func,
     onChangeText: PropTypes.func,
 
-    containerStyle: PropTypes.object,
+    containerStyle: ViewPropTypes.style,
   };
 
   constructor(props) {
