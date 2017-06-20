@@ -296,7 +296,7 @@ export default class Dropdown extends PureComponent {
 
         return (
           <DropdownItem index={index} key={index} {...props}>
-            <Text style={{ color, fontSize }}>{value}</Text>
+            <Text style={{ color, fontSize }} numberOfLines={1}>{value}</Text>
           </DropdownItem>
         );
       });
