@@ -304,7 +304,7 @@ export default class Dropdown extends PureComponent {
       shadeOpacity,
       onPress: this.onSelect,
       style: {
-        height: fontSize * 1.5 + 16,
+        height: this.itemSize(),
         paddingLeft: leftInset,
         paddingRight: rightInset,
       },
@@ -329,7 +329,7 @@ export default class Dropdown extends PureComponent {
   render() {
     let { value, left, top, width, opacity, selected, modal } = this.state;
     let { data = [], rippleOpacity, containerStyle, ...props } = this.props;
-    let { fontSize, baseColor, animationDuration } = props;
+    let { baseColor, animationDuration } = props;
 
     let dimensions = Dimensions.get('window');
 
@@ -376,7 +376,7 @@ export default class Dropdown extends PureComponent {
       top: 16,
       left: 0,
       right: 0,
-      height: fontSize * 1.5 + 16 + 8,
+      height: itemSize + 8,
     };
 
     return (
