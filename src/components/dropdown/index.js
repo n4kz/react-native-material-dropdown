@@ -405,6 +405,7 @@ export default class Dropdown extends PureComponent {
                 <ScrollView
                   ref={this.updateScrollRef}
                   style={styles.scroll}
+                  scrollEnabled={visibleItemCount < itemCount}
                   contentContainerStyle={styles.scrollContainer}
                 >
                   {this.renderItems()}
