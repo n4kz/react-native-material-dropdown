@@ -55,18 +55,19 @@ class Example extends Component {
 
 ## Properties
 
- name              | description                               | type    | default
-:----------------- |:----------------------------------------- | -------:|:------------------
- animationDuration | Text field animation duration in ms       |  Number | 225
- fontSize          | Text field font size                      |  Number | 16
- labelFontSize     | Text field label font size                |  Number | 12
- baseColor         | Text field base color                     |  String | rgba(0, 0, 0, .38)
- itemColor         | Dropdown item text color (inactive items) |  String | rgba(0, 0, 0, .54)
- textColor         | Dropdown item text color (active item)    |  String | rgba(0, 0, 0, .87)
- itemCount         | Dropdown visible item count               |  Number | 4
- data              | Dropdown item data                        |  Object | -
- value             | Selected value                            |  String | -
- containerStyle    | Styles for container view                 |  Object | -
+ name              | description                                   | type     | default
+:----------------- |:--------------------------------------------- | --------:|:------------------
+ animationDuration | Text field animation duration in ms           |   Number | 225
+ fontSize          | Text field font size                          |   Number | 16
+ labelFontSize     | Text field label font size                    |   Number | 12
+ baseColor         | Text field base color                         |   String | rgba(0, 0, 0, .38)
+ itemColor         | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
+ textColor         | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
+ itemCount         | Dropdown visible item count                   |   Number | 4
+ data              | Dropdown item data                            |   Object | -
+ value             | Selected value                                |   String | -
+ containerStyle    | Styles for container view                     |   Object | -
+ onChangeText      | Selection callback (args: value, index, data) | Function | -
 
 Other [TextField][textfield] and [TextInput][textinput] properties will also work
 
