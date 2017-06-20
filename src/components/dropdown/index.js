@@ -22,6 +22,8 @@ const maxMargin = 16;
 
 export default class Dropdown extends PureComponent {
   static defaultProps = {
+    disabled: false,
+
     rippleOpacity: 0.54,
     shadeOpacity: 0.12,
 
@@ -36,6 +38,8 @@ export default class Dropdown extends PureComponent {
   };
 
   static propTypes = {
+    disabled: PropTypes.bool,
+
     rippleOpacity: PropTypes.number,
     shadeOpacity: PropTypes.number,
 
