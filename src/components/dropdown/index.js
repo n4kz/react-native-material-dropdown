@@ -152,6 +152,7 @@ export default class Dropdown extends PureComponent {
 
       this.setState({
         modal: true,
+        inset: Math.round((right - left - width) / 2.0),
         width: right - left,
         top: y + Platform.select({ ios: 1, android: 2 }) + 24,
         left,
@@ -259,7 +260,7 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItems() {
-    let { selected } = this.state;
+    let { selected, inset } = this.state;
 
     let {
       data = [],
@@ -281,6 +282,7 @@ export default class Dropdown extends PureComponent {
       onPress: this.onSelect,
       style: {
         height: fontSize * 1.5 + 16,
+        paddingHorizontal: inset,
       },
     };
 
