@@ -122,7 +122,7 @@ export default class Dropdown extends PureComponent {
     let minMargin = 8;
     let maxMargin = 16;
 
-    this.container.measureInWindow((x, y, width, height) => {
+    this.container.measureInWindow((x, y, containerWidth, containerHeight) => {
       let { opacity } = this.state;
 
       let delay = Math.max(0, animationDuration - (Date.now() - timestamp));
@@ -147,15 +147,33 @@ export default class Dropdown extends PureComponent {
         }
       }
 
-      let left = Math.max(minMargin, x - maxMargin);
-      let right = Math.min(dimensions.width - minMargin, x + width + maxMargin);
+      let left = x - maxMargin;
+      let leftInset;
+
+      if (left > minMargin) {
+        leftInset = maxMargin;
+      } else {
+        left = minMargin;
+        leftInset = minMargin;
+      }
+
+      let right = x + containerWidth + maxMargin;
+      let rightInset;
+
+      if (dimensions.width - right > minMargin) {
+        rightInset = maxMargin;
+      } else {
+        right = dimensions.width - minMargin;
+        rightInset = minMargin;
+      }
 
       this.setState({
         modal: true,
-        inset: Math.round((right - left - width) / 2.0),
         width: right - left,
         top: y + Platform.select({ ios: 1, android: 2 }) + 24,
         left,
+        leftInset,
+        rightInset,
         selected,
       });
 
@@ -260,7 +278,7 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItems() {
-    let { selected, inset } = this.state;
+    let { selected, leftInset, rightInset } = this.state;
 
     let {
       data = [],
@@ -282,7 +300,8 @@ export default class Dropdown extends PureComponent {
       onPress: this.onSelect,
       style: {
         height: fontSize * 1.5 + 16,
-        paddingHorizontal: inset,
+        paddingLeft: leftInset,
+        paddingRight: rightInset,
       },
     };
 
