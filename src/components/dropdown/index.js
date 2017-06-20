@@ -100,7 +100,11 @@ export default class Dropdown extends PureComponent {
   }
 
   onPress(event) {
-    let { data = [], onFocus, animationDuration } = this.props;
+    let { data = [], disabled, onFocus, animationDuration } = this.props;
+
+    if (disabled) {
+      return;
+    }
 
     let itemCount = data.length;
     let visibleItemCount = this.visibleItemCount();
