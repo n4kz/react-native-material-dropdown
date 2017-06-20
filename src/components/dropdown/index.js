@@ -17,6 +17,9 @@ import { TextField } from 'react-native-material-textfield';
 import DropdownItem from '../item';
 import styles from './styles';
 
+const minMargin = 8;
+const maxMargin = 16;
+
 export default class Dropdown extends PureComponent {
   static defaultProps = {
     rippleOpacity: 0.54,
@@ -119,8 +122,6 @@ export default class Dropdown extends PureComponent {
     }
 
     let dimensions = Dimensions.get('window');
-    let minMargin = 8;
-    let maxMargin = 16;
 
     this.container.measureInWindow((x, y, containerWidth, containerHeight) => {
       let { opacity } = this.state;
