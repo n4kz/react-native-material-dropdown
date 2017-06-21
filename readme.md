@@ -82,6 +82,15 @@ Other [TextField][textfield] and [TextInput][textinput] properties will also wor
  selectedIndex() | Get selected index             |      Number
  selectedItem()  | Get selected item              |      Object
 
+## Example
+
+```bash
+git clone https://github.com/n4kz/react-native-material-dropdown
+cd react-native-material-dropdown/example
+npm install
+npm run ios # or npm run android
+```
+
 ## Copyright and License
 
 BSD License
