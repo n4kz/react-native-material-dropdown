@@ -57,6 +57,8 @@ class Example extends Component {
 
  name              | description                                   | type     | default
 :----------------- |:--------------------------------------------- | --------:|:------------------
+ label             | Text field label text (required)              |   String | -
+ error             | Text field error text                         |   String | -
  animationDuration | Text field animation duration in ms           |   Number | 225
  fontSize          | Text field font size                          |   Number | 16
  labelFontSize     | Text field label font size                    |   Number | 12
