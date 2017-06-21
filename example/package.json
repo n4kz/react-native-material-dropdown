@@ -1,0 +1,17 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android"
+  },
+  "dependencies": {
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.45.1",
+    "react-native-material-dropdown": "file:../"
+  },
+  "devDependencies": {
+    "babel-preset-react-native": "2.0.0"
+  }
+}
