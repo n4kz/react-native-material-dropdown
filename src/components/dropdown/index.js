@@ -115,11 +115,13 @@ export default class Dropdown extends PureComponent {
     let tailItemCount = this.tailItemCount();
     let timestamp = Date.now();
 
-    /* Adjust event location */
-    event.nativeEvent.locationY -= 16;
+    if (null != event) {
+      /* Adjust event location */
+      event.nativeEvent.locationY -= 16;
 
-    /* Start ripple directly from event */
-    this.ripple.startRipple(event);
+      /* Start ripple directly from event */
+      this.ripple.startRipple(event);
+    }
 
     if (!itemCount) {
       return;
