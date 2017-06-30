@@ -79,12 +79,12 @@ Other [TextField][textfield] and [TextInput][textinput] properties will also wor
 ## Methods
 
  name            | description                    | returns
-:--------------- |:------------------------------ | -------:
- focus()         | Acquire focus (open dropdown)  |       -
- blur()          | Release focus (close dropdown) |       -
- value()         | Get current value              |  String
- selectedIndex() | Get selected index             |  Number
- selectedItem()  | Get selected item              |  Object
+:--------------- |:------------------------------ |:--------
+ focus()         | Acquire focus (open dropdown)  | -
+ blur()          | Release focus (close dropdown) | -
+ value()         | Get current value              | String
+ selectedIndex() | Get selected index             | Number
+ selectedItem()  | Get selected item              | Object
  isFocused()     | Get current focus state        | Boolean
 
 ## Example
