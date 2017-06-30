@@ -16,9 +16,10 @@ export default function init() {
       this.typographyRef = this.updateRef.bind(this, 'typography');
 
       this.state = {
-        sample: 'Sample text',
+        sample: 'The quick brown fox jumps over the lazy dog',
         typography: 'Headline',
-        name: 'Blue',
+        name: 'Cyan',
+        code: 'A700'
       };
     }
 
@@ -45,13 +46,14 @@ export default function init() {
       ];
 
       return (
-        <ScrollView style={styles.scroll}>
+        <View style={styles.screen}>
           <View style={styles.container}>
             <TextField
               ref={this.sampleRef}
               value={sample}
               onChangeText={this.onChangeText}
-              label='Sample'
+              label='Sample text'
+              multiline={true}
             />
 
             <Dropdown
@@ -68,7 +70,7 @@ export default function init() {
                   ref={this.nameRef}
                   value={name}
                   onChangeText={this.onChangeText}
-                  label='Name'
+                  label='Color name'
                   data={colorNameData}
                 />
               </View>
@@ -78,7 +80,7 @@ export default function init() {
                   ref={this.codeRef}
                   value={code}
                   onChangeText={this.onChangeText}
-                  label='Code'
+                  label='Color code'
                   data={colorCodeData}
                 />
               </View>
@@ -88,7 +90,7 @@ export default function init() {
           <View style={[styles.container, styles.textContainer]}>
             <Text style={textStyle}>{sample}</Text>
           </View>
-        </ScrollView>
+        </View>
       );
     }
   }
@@ -97,9 +99,10 @@ export default function init() {
 }
 
 const styles = {
-  scroll: {
-    paddingHorizontal: 4,
-    paddingVertical: 48,
+  screen: {
+    flex: 1,
+    padding: 4,
+    paddingTop: 56,
     backgroundColor: '#E8EAF6',
   },
 
@@ -120,6 +123,7 @@ const styles = {
     elevation: 1,
     shadowRadius: 1,
     shadowOpacity: 0.3,
+    justifyContent: 'center',
     shadowOffset: {
       width: 0,
       height: 1,
