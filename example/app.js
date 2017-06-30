@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, ScrollView, Text, View } from 'react-native';
+import { AppRegistry, Text, View } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Dropdown } from 'react-native-material-dropdown';
 
@@ -19,7 +19,7 @@ export default function init() {
         sample: 'The quick brown fox jumps over the lazy dog',
         typography: 'Headline',
         name: 'Cyan',
-        code: 'A700'
+        code: 'A700',
       };
     }
 
