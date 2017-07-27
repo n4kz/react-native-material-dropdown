@@ -5,7 +5,17 @@
   "author": "Alexander Nazarov <n4kz@n4kz.com>",
 
   "description": "Material dropdown",
-  "keywords": ["react", "react-component", "react-native", "ios", "android", "dropdown", "material"],
+  "keywords": [
+    "react",
+    "react-component",
+    "react-native",
+    "ios",
+    "android",
+    "material",
+    "dropdown",
+    "spinner",
+    "select"
+  ],
 
   "main": "index.js",
 
