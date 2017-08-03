@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { ViewPropTypes } from 'react-native';
+import { View, ViewPropTypes } from 'react-native';
 import { Button } from 'react-native-material-buttons';
 
 import styles from './styles';
@@ -13,7 +13,8 @@ export default class DropdownItem extends PureComponent {
   };
 
   static propTypes = {
-    style: ViewPropTypes.style,
+    style: (ViewPropTypes || View.propTypes).style,
+
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node,

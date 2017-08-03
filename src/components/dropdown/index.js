@@ -61,7 +61,7 @@ export default class Dropdown extends PureComponent {
     onBlur: PropTypes.func,
     onChangeText: PropTypes.func,
 
-    containerStyle: ViewPropTypes.style,
+    containerStyle: (ViewPropTypes || View.propTypes).style,
   };
 
   constructor(props) {
