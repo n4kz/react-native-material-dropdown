@@ -291,6 +291,22 @@ export default class Dropdown extends PureComponent {
     this[name] = ref;
   }
 
+  renderBase() {
+    let { value } = this.state;
+    let { containerStyle, ...props } = this.props;
+
+    return (
+      <TextField
+        {...props}
+
+        value={value}
+        editable={false}
+        onChangeText={undefined}
+        renderAccessory={this.renderAccessory}
+      />
+    );
+  }
+
   renderAccessory() {
     let { baseColor: backgroundColor } = this.props;
     let triangleStyle = { backgroundColor };
@@ -359,11 +375,11 @@ export default class Dropdown extends PureComponent {
       rippleOpacity,
       rippleInsets,
       containerStyle,
-      ...props
+      baseColor,
+      animationDuration,
     } = this.props;
 
-    let { value, left, top, width, opacity, selected, modal } = this.state;
-    let { baseColor, animationDuration } = props;
+    let { left, top, width, opacity, selected, modal } = this.state;
 
     let dimensions = Dimensions.get('window');
 
@@ -417,14 +433,7 @@ export default class Dropdown extends PureComponent {
       <View onLayout={() => undefined} ref={this.updateContainerRef} style={containerStyle}>
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View pointerEvents='box-only'>
-            <TextField
-              {...props}
-
-              value={value}
-              editable={false}
-              onChangeText={undefined}
-              renderAccessory={this.renderAccessory}
-            />
+            {this.renderBase()}
 
             <Ripple
               style={rippleStyle}
