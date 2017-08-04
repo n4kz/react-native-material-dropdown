@@ -77,6 +77,7 @@ export default class Dropdown extends PureComponent {
     onBlur: PropTypes.func,
     onChangeText: PropTypes.func,
 
+    renderBase: PropTypes.func,
     renderAccessory: PropTypes.func,
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
@@ -297,9 +298,16 @@ export default class Dropdown extends PureComponent {
     let { value } = this.state;
     let {
       containerStyle,
+      rippleInsets,
+      rippleOpacity,
+      renderBase,
       renderAccessory = this.renderAccessory,
       ...props
     } = this.props;
+
+    if ('function' === typeof renderBase) {
+      return renderBase({ ...props, value, renderAccessory });
+    }
 
     return (
       <TextField
