@@ -69,6 +69,7 @@ class Example extends Component {
  itemColor         | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
  textColor         | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
  itemCount         | Dropdown visible item count                   |   Number | 4
+ itemTextStyle     | Dropdown item text styles                     |   Object | -
  data              | Dropdown item data                            |   Object | -
  value             | Selected value                                |   String | -
  containerStyle    | Styles for container view                     |   Object | -
