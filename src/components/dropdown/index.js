@@ -24,6 +24,13 @@ export default class Dropdown extends PureComponent {
   static defaultProps = {
     disabled: false,
 
+    rippleInsets: {
+      top: 16,
+      right: 0,
+      bottom: -8,
+      left: 0,
+    },
+
     rippleOpacity: 0.54,
     shadeOpacity: 0.12,
 
@@ -39,6 +46,13 @@ export default class Dropdown extends PureComponent {
 
   static propTypes = {
     disabled: PropTypes.bool,
+
+    rippleInsets: PropTypes.shape({
+      top: PropTypes.number,
+      right: PropTypes.number,
+      bottom: PropTypes.number,
+      left: PropTypes.number,
+    }),
 
     rippleOpacity: PropTypes.number,
     shadeOpacity: PropTypes.number,
@@ -340,8 +354,15 @@ export default class Dropdown extends PureComponent {
   }
 
   render() {
+    let {
+      data = [],
+      rippleOpacity,
+      rippleInsets,
+      containerStyle,
+      ...props
+    } = this.props;
+
     let { value, left, top, width, opacity, selected, modal } = this.state;
-    let { data = [], rippleOpacity, containerStyle, ...props } = this.props;
     let { baseColor, animationDuration } = props;
 
     let dimensions = Dimensions.get('window');
@@ -384,12 +405,12 @@ export default class Dropdown extends PureComponent {
       transform: [{ translateY }],
     };
 
+    let { bottom, ...insets } = rippleInsets;
     let rippleStyle = {
+      ...insets,
+
+      height: itemSize - bottom,
       position: 'absolute',
-      top: 16,
-      left: 0,
-      right: 0,
-      height: itemSize + 8,
     };
 
     return (
