@@ -55,6 +55,8 @@ export default class Dropdown extends PureComponent {
     itemColor: PropTypes.string,
     baseColor: PropTypes.string,
 
+    itemTextStyle: Text.propTypes.style,
+
     itemCount: PropTypes.number,
 
     onFocus: PropTypes.func,
@@ -297,6 +299,7 @@ export default class Dropdown extends PureComponent {
       itemColor,
       baseColor,
       fontSize,
+      itemTextStyle,
       animationDuration,
       rippleOpacity,
       shadeOpacity,
@@ -324,9 +327,13 @@ export default class Dropdown extends PureComponent {
             itemColor:
           textColor;
 
+        let style = { color, fontSize };
+
         return (
           <DropdownItem index={index} key={index} {...props}>
-            <Text style={{ color, fontSize }} numberOfLines={1}>{value}</Text>
+            <Text style={[itemTextStyle, style]} numberOfLines={1}>
+              {value}
+            </Text>
           </DropdownItem>
         );
       });
