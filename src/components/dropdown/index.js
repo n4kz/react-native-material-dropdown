@@ -218,7 +218,11 @@ export default class Dropdown extends PureComponent {
               duration: animationDuration,
               toValue: 1,
             })
-            .start();
+            .start(() => {
+              if (this.mounted && 'ios' === Platform.OS) {
+                this.scroll.flashScrollIndicators();
+              }
+            });
         }
       }), delay);
     });
