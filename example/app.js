@@ -155,8 +155,8 @@ const styles = {
 };
 
 const typographyData = [
-  { value: 'Display2' },
-  { value: 'Display1' },
+  { value: 'Display2', label: 'Display 2' },
+  { value: 'Display1', label: 'Display 1' },
   { value: 'Headline' },
   { value: 'Title' },
   { value: 'Subheading' },

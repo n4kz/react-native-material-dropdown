@@ -8,10 +8,10 @@
   },
   "dependencies": {
     "react": "16.0.0-alpha.12",
-    "react-native": "0.45.1",
+    "react-native": "0.47.1",
     "react-native-material-dropdown": "file:../"
   },
   "devDependencies": {
-    "babel-preset-react-native": "2.0.0"
+    "babel-preset-react-native": "2.1.0"
   }
 }
