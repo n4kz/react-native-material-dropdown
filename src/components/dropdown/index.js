@@ -63,6 +63,7 @@ export default class Dropdown extends PureComponent {
     value: PropTypes.string,
     data: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string,
+      label: PropTypes.string,
     })),
 
     textColor: PropTypes.string,
@@ -305,15 +306,17 @@ export default class Dropdown extends PureComponent {
       ...props
     } = this.props;
 
+    let { label = value } = this.selectedItem() || {};
+
     if ('function' === typeof renderBase) {
-      return renderBase({ ...props, value, renderAccessory });
+      return renderBase({ ...props, label, value, renderAccessory });
     }
 
     return (
       <TextField
         {...props}
 
-        value={value}
+        value={label}
         editable={false}
         onChangeText={undefined}
         renderAccessory={renderAccessory}
@@ -364,7 +367,7 @@ export default class Dropdown extends PureComponent {
     };
 
     return data
-      .map(({ value }, index) => {
+      .map(({ value, label = value }, index) => {
         let color = ~selected?
           index === selected?
             textColor:
@@ -376,7 +379,7 @@ export default class Dropdown extends PureComponent {
         return (
           <DropdownItem index={index} key={index} {...props}>
             <Text style={[itemTextStyle, style]} numberOfLines={1}>
-              {value}
+              {label}
             </Text>
           </DropdownItem>
         );
