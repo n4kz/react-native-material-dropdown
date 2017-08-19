@@ -66,8 +66,9 @@ class Example extends Component {
  fontSize          | Text field font size                          |   Number | 16
  labelFontSize     | Text field label font size                    |   Number | 12
  baseColor         | Text field base color                         |   String | rgba(0, 0, 0, .38)
+ textColor         | Text field text color                         |   String | rgba(0, 0, 0, .87)
  itemColor         | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
- textColor         | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
+ selectedItemColor | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
  itemCount         | Dropdown visible item count                   |   Number | 4
  itemTextStyle     | Dropdown item text styles                     |   Object | -
  data              | Dropdown item data                            |   Object | -
