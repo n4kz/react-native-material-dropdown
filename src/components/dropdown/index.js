@@ -135,6 +135,7 @@ export default class Dropdown extends PureComponent {
       data = [],
       disabled,
       onFocus,
+      rippleInsets,
       labelHeight,
       itemPadding,
       animationDuration,
@@ -151,7 +152,7 @@ export default class Dropdown extends PureComponent {
 
     if (null != event) {
       /* Adjust event location */
-      event.nativeEvent.locationY -= 16;
+      event.nativeEvent.locationY -= rippleInsets.top;
 
       /* Start ripple directly from event */
       this.ripple.startRipple(event);
