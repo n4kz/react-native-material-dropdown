@@ -42,6 +42,7 @@ export default class Dropdown extends PureComponent {
     baseColor: 'rgba(0, 0, 0, .38)',
 
     itemCount: 4,
+    itemPadding: 8,
   };
 
   static propTypes = {
@@ -74,6 +75,7 @@ export default class Dropdown extends PureComponent {
     itemTextStyle: Text.propTypes.style,
 
     itemCount: PropTypes.number,
+    itemPadding: PropTypes.number,
 
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -281,9 +283,9 @@ export default class Dropdown extends PureComponent {
   }
 
   itemSize() {
-    let { fontSize } = this.props;
+    let { fontSize, itemPadding } = this.props;
 
-    return fontSize * 1.5 + 16;
+    return fontSize * 1.5 + itemPadding * 2;
   }
 
   visibleItemCount() {
@@ -400,6 +402,7 @@ export default class Dropdown extends PureComponent {
       containerStyle,
       baseColor,
       animationDuration,
+      itemPadding,
     } = this.props;
 
     let { left, top, width, opacity, selected, modal } = this.state;
@@ -416,8 +419,8 @@ export default class Dropdown extends PureComponent {
       height: dimensions.height,
     };
 
-    let height = 16 + itemSize * visibleItemCount;
-    let translateY = -8;
+    let height = 2 * itemPadding + itemSize * visibleItemCount;
+    let translateY = -itemPadding;
 
     switch (selected) {
       case -1:
