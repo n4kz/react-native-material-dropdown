@@ -43,6 +43,8 @@ export default class Dropdown extends PureComponent {
 
     itemCount: 4,
     itemPadding: 8,
+
+    labelHeight: 32,
   };
 
   static propTypes = {
@@ -76,6 +78,8 @@ export default class Dropdown extends PureComponent {
 
     itemCount: PropTypes.number,
     itemPadding: PropTypes.number,
+
+    labelHeight: PropTypes.number,
 
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -127,7 +131,14 @@ export default class Dropdown extends PureComponent {
   }
 
   onPress(event) {
-    let { data = [], disabled, onFocus, animationDuration } = this.props;
+    let {
+      data = [],
+      disabled,
+      onFocus,
+      labelHeight,
+      itemPadding,
+      animationDuration,
+    } = this.props;
 
     if (disabled) {
       return;
@@ -201,10 +212,15 @@ export default class Dropdown extends PureComponent {
         rightInset = minMargin;
       }
 
+      let top = y
+        + Platform.select({ ios: 1, android: 2 })
+        + labelHeight
+        - itemPadding;
+
       this.setState({
         modal: true,
         width: right - left,
-        top: y + Platform.select({ ios: 1, android: 2 }) + 24,
+        top,
         left,
         leftInset,
         rightInset,
