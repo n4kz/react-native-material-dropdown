@@ -65,11 +65,13 @@ class Example extends Component {
  animationDuration | Text field animation duration in ms           |   Number | 225
  fontSize          | Text field font size                          |   Number | 16
  labelFontSize     | Text field label font size                    |   Number | 12
+ labelHeight       | Text field label height                       |   Number | 32
  baseColor         | Text field base color                         |   String | rgba(0, 0, 0, .38)
  textColor         | Text field text color                         |   String | rgba(0, 0, 0, .87)
  itemColor         | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
  selectedItemColor | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
  itemCount         | Dropdown visible item count                   |   Number | 4
+ itemPadding       | Dropdown item vertical padding                |   Number | 8
  itemTextStyle     | Dropdown item text styles                     |   Object | -
  data              | Dropdown item data                            |   Object | -
  value             | Selected value                                |   String | -
