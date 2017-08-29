@@ -31,7 +31,7 @@
 
   "devDependencies": {
     "babel-eslint": "^7.2.0",
-    "eslint": "^3.18.0",
+    "eslint": "^4.5.0",
     "eslint-plugin-react": "^7.0.0"
   },
 
@@ -43,6 +43,6 @@
     "prop-types": "^15.5.9",
     "react-native-material-buttons": "^0.4.0",
     "react-native-material-ripple": "^0.7.0",
-    "react-native-material-textfield": "^0.8.0"
+    "react-native-material-textfield": "^0.9.0"
   }
 }
