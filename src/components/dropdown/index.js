@@ -45,8 +45,6 @@ export default class Dropdown extends PureComponent {
     itemPadding: 8,
 
     labelHeight: 32,
-
-    dropdownPosition: null,
   };
 
   static propTypes = {
