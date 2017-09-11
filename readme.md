@@ -70,6 +70,7 @@ class Example extends Component {
  textColor         | Text field text color                         |   String | rgba(0, 0, 0, .87)
  itemColor         | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
  selectedItemColor | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
+ dropdownPosition  | Dropdown position (dynamic if undefined)      |   Number | -
  itemCount         | Dropdown visible item count                   |   Number | 4
  itemPadding       | Dropdown item vertical padding                |   Number | 8
  itemTextStyle     | Dropdown item text styles                     |   Object | -
