@@ -45,6 +45,8 @@ export default class Dropdown extends PureComponent {
     itemPadding: 8,
 
     labelHeight: 32,
+
+    dropdownPosition: null,
   };
 
   static propTypes = {
@@ -89,6 +91,8 @@ export default class Dropdown extends PureComponent {
     renderAccessory: PropTypes.func,
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
+
+    dropdownPosition: PropTypes.number,
   };
 
   constructor(props) {
@@ -138,6 +142,7 @@ export default class Dropdown extends PureComponent {
       rippleInsets,
       labelHeight,
       itemPadding,
+      dropdownPosition,
       animationDuration,
     } = this.props;
 
@@ -176,20 +181,30 @@ export default class Dropdown extends PureComponent {
       let offset = 0;
 
       if (itemCount > visibleItemCount) {
-        switch (selected) {
-          case -1:
-            break;
+        if (null == dropdownPosition) {
+          switch (selected) {
+            case -1:
+              break;
 
-          case 0:
-          case 1:
-            break;
+            case 0:
+            case 1:
+              break;
 
-          default:
-            if (selected >= itemCount - tailItemCount) {
-              offset = this.itemSize() * (itemCount - visibleItemCount);
+            default:
+              if (selected >= itemCount - tailItemCount) {
+                offset = this.itemSize() * (itemCount - visibleItemCount);
+              } else {
+                offset = this.itemSize() * (selected - 1);
+              }
+          }
+        } else {
+          if (~selected) {
+            if (dropdownPosition < 0) {
+              offset = this.itemSize() * (selected - visibleItemCount - dropdownPosition);
             } else {
-              offset = this.itemSize() * (selected - 1);
+              offset = this.itemSize() * (selected - dropdownPosition);
             }
+          }
         }
       }
 
@@ -420,6 +435,7 @@ export default class Dropdown extends PureComponent {
       baseColor,
       animationDuration,
       itemPadding,
+      dropdownPosition,
     } = this.props;
 
     let { left, top, width, opacity, selected, modal } = this.state;
@@ -439,20 +455,28 @@ export default class Dropdown extends PureComponent {
     let height = 2 * itemPadding + itemSize * visibleItemCount;
     let translateY = -itemPadding;
 
-    switch (selected) {
-      case -1:
-        translateY -= 1 === itemCount? 0 : itemSize;
-        break;
+    if (null == dropdownPosition) {
+      switch (selected) {
+        case -1:
+          translateY -= 1 === itemCount? 0 : itemSize;
+          break;
 
-      case 0:
-        break;
+        case 0:
+          break;
 
-      default:
-        if (selected >= itemCount - tailItemCount) {
-          translateY -= (visibleItemCount - (itemCount - selected)) * itemSize;
-        } else {
-          translateY -= itemSize;
-        }
+        default:
+          if (selected >= itemCount - tailItemCount) {
+            translateY -= itemSize * (visibleItemCount - (itemCount - selected));
+          } else {
+            translateY -= itemSize;
+          }
+      }
+    } else {
+      if (dropdownPosition < 0) {
+        translateY -= itemSize * (visibleItemCount + dropdownPosition);
+      } else {
+        translateY -= itemSize * dropdownPosition;
+      }
     }
 
     let pickerStyle = {
