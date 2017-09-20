@@ -253,7 +253,11 @@ export default class Dropdown extends PureComponent {
             })
             .start(() => {
               if (this.mounted && 'ios' === Platform.OS) {
-                this.scroll.flashScrollIndicators();
+                let { flashScrollIndicators } = this.scroll;
+
+                if ('function' === typeof flashScrollIndicators) {
+                  flashScrollIndicators.call(this.scroll);
+                }
               }
             });
         }
