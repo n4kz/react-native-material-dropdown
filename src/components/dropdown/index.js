@@ -19,7 +19,7 @@ import styles from './styles';
 
 const minMargin = 8;
 const maxMargin = 16;
-
+const SUPPORTED_ORIENTATIONS = ["portrait", "portrait-upside-down", "landscape", "landscape-left", "landscape-right"];
 export default class Dropdown extends PureComponent {
   static defaultProps = {
     disabled: false,
@@ -515,7 +515,7 @@ export default class Dropdown extends PureComponent {
           </View>
         </TouchableWithoutFeedback>
 
-        <Modal visible={modal} transparent={true} onRequestClose={this.onClose}>
+        <Modal visible={modal} transparent={true} onRequestClose={this.onClose} supportedOrientations={SUPPORTED_ORIENTATIONS}>
           <TouchableWithoutFeedback onPress={this.onClose}>
             <View style={overlayStyle}>
               <Animated.View style={[styles.picker, pickerStyle]}>
