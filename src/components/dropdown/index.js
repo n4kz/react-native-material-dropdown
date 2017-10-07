@@ -82,6 +82,7 @@ export default class Dropdown extends PureComponent {
     renderAccessory: PropTypes.func,
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
+    pickerStyle: (ViewPropTypes || View.propTypes).style,
 
     dropdownPosition: PropTypes.number,
   };
@@ -436,6 +437,7 @@ export default class Dropdown extends PureComponent {
       data = [],
       rippleOpacity,
       containerStyle,
+      pickerStyle: pickerStyleOverrides,
       baseColor,
       animationDuration,
       itemPadding,
@@ -520,7 +522,9 @@ export default class Dropdown extends PureComponent {
         <Modal visible={modal} transparent={true} onRequestClose={this.onClose}>
           <TouchableWithoutFeedback onPress={this.onClose}>
             <View style={overlayStyle}>
-              <Animated.View style={[styles.picker, pickerStyle]}>
+              <Animated.View
+                style={[styles.picker, pickerStyle, pickerStyleOverrides]}
+              >
                 <ScrollView
                   ref={this.updateScrollRef}
                   style={styles.scroll}
