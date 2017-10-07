@@ -24,13 +24,6 @@ export default class Dropdown extends PureComponent {
   static defaultProps = {
     disabled: false,
 
-    rippleInsets: {
-      top: 16,
-      right: 0,
-      bottom: -8,
-      left: 0,
-    },
-
     rippleOpacity: 0.54,
     shadeOpacity: 0.12,
 
@@ -137,7 +130,6 @@ export default class Dropdown extends PureComponent {
       data = [],
       disabled,
       onFocus,
-      rippleInsets,
       labelHeight,
       itemPadding,
       dropdownPosition,
@@ -155,7 +147,7 @@ export default class Dropdown extends PureComponent {
 
     if (null != event) {
       /* Adjust event location */
-      event.nativeEvent.locationY -= rippleInsets.top;
+      event.nativeEvent.locationY -= this.rippleInsets().top;
 
       /* Start ripple directly from event */
       this.ripple.startRipple(event);
@@ -332,6 +324,17 @@ export default class Dropdown extends PureComponent {
     return Math.max(this.visibleItemCount() - 2, 0);
   }
 
+  rippleInsets() {
+    let {
+      top = 16,
+      right = 0,
+      bottom = -8,
+      left = 0,
+    } = this.props.rippleInsets || {};
+
+    return { top, right, bottom, left };
+  }
+
   updateRef(name, ref) {
     this[name] = ref;
   }
@@ -432,7 +435,6 @@ export default class Dropdown extends PureComponent {
     let {
       data = [],
       rippleOpacity,
-      rippleInsets,
       containerStyle,
       baseColor,
       animationDuration,
@@ -490,7 +492,7 @@ export default class Dropdown extends PureComponent {
       transform: [{ translateY }],
     };
 
-    let { bottom, ...insets } = rippleInsets;
+    let { bottom, ...insets } = this.rippleInsets();
     let rippleStyle = {
       ...insets,
 
