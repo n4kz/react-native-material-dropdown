@@ -59,7 +59,10 @@ export default class Dropdown extends PureComponent {
     value: PropTypes.string,
     data: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string,
-      label: PropTypes.string,
+      label: PropTypes.oneOf([
+        PropTypes.string,
+        PropTypes.node,
+      ]),
     })),
 
     textColor: PropTypes.string,
@@ -357,11 +360,15 @@ export default class Dropdown extends PureComponent {
       return renderBase({ ...props, label, value, renderAccessory });
     }
 
+    let title = 'string' === typeof label?
+        label:
+        value;
+
     return (
       <TextField
         {...props}
 
-        value={label}
+        value={title}
         editable={false}
         onChangeText={undefined}
         renderAccessory={renderAccessory}
