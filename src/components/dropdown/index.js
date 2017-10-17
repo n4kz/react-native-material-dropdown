@@ -239,8 +239,9 @@ export default class Dropdown extends PureComponent {
 
       setTimeout((() => {
         if (this.mounted) {
-          this.scroll
-            .scrollTo({ x: 0, y: offset, animated: false });
+          if (this.scroll) {
+            this.scroll.scrollTo({ x: 0, y: offset, animated: false });
+          }
 
           Animated
             .timing(opacity, {
@@ -249,7 +250,7 @@ export default class Dropdown extends PureComponent {
             })
             .start(() => {
               if (this.mounted && 'ios' === Platform.OS) {
-                let { flashScrollIndicators } = this.scroll;
+                let { flashScrollIndicators } = this.scroll || {};
 
                 if ('function' === typeof flashScrollIndicators) {
                   flashScrollIndicators.call(this.scroll);
