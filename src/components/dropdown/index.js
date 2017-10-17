@@ -59,7 +59,7 @@ export default class Dropdown extends PureComponent {
     value: PropTypes.string,
     data: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string,
-      label: PropTypes.oneOf([
+      label: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node,
       ]),
