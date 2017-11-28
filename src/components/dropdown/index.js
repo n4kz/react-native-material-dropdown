@@ -383,16 +383,9 @@ export default class Dropdown extends PureComponent {
     this[name] = ref;
   }
 
-  renderBase() {
+  renderBase(props) {
     let { value } = this.state;
-    let {
-      containerStyle,
-      rippleInsets,
-      rippleOpacity,
-      renderBase,
-      renderAccessory = this.renderAccessory,
-      ...props
-    } = this.props;
+    let { renderBase, renderAccessory = this.renderAccessory } = this.props;
 
     let { label = String(value) } = this.selectedItem() || {};
 
@@ -481,18 +474,27 @@ export default class Dropdown extends PureComponent {
 
   render() {
     let {
-      data = [],
+      renderBase,
+      renderAccessory,
+      containerStyle,
+      pickerStyle: pickerStyleOverrides,
+
       rippleInsets,
       rippleOpacity,
       rippleCentered,
       rippleSequential,
-      containerStyle,
-      pickerStyle: pickerStyleOverrides,
+
+      ...props
+    } = this.props;
+
+    let {
+      data = [],
+      disabled,
       baseColor,
-      animationDuration,
       itemPadding,
       dropdownPosition,
-    } = this.props;
+      animationDuration,
+    } = props;
 
     let { left, top, width, opacity, selected, modal } = this.state;
 
@@ -552,11 +554,16 @@ export default class Dropdown extends PureComponent {
       position: 'absolute',
     };
 
+    let touchableProps = {
+      disabled,
+      onPress: this.onPress,
+    };
+
     return (
       <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle}>
-        <TouchableWithoutFeedback onPress={this.onPress}>
+        <TouchableWithoutFeedback {...touchableProps}>
           <View pointerEvents='box-only'>
-            {this.renderBase()}
+            {this.renderBase(props)}
 
             <Ripple
               style={rippleStyle}
