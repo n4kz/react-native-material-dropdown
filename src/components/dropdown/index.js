@@ -36,6 +36,16 @@ export default class Dropdown extends PureComponent {
   static defaultProps = {
     disabled: false,
 
+    rippleCentered: false,
+    rippleSequential: true,
+
+    rippleInsets: {
+      top: 16,
+      right: 0,
+      bottom: -8,
+      left: 0,
+    },
+
     rippleOpacity: 0.54,
     shadeOpacity: 0.12,
 
@@ -54,6 +64,9 @@ export default class Dropdown extends PureComponent {
 
   static propTypes = {
     disabled: PropTypes.bool,
+
+    rippleCentered: PropTypes.bool,
+    rippleSequential: PropTypes.bool,
 
     rippleInsets: PropTypes.shape({
       top: PropTypes.number,
@@ -459,7 +472,10 @@ export default class Dropdown extends PureComponent {
   render() {
     let {
       data = [],
+      rippleInsets,
       rippleOpacity,
+      rippleCentered,
+      rippleSequential,
       containerStyle,
       pickerStyle: pickerStyleOverrides,
       baseColor,
@@ -537,7 +553,8 @@ export default class Dropdown extends PureComponent {
               rippleColor={baseColor}
               rippleDuration={animationDuration * 2}
               rippleOpacity={rippleOpacity}
-              rippleSequential={true}
+              rippleCentered={rippleCentered}
+              rippleSequential={rippleSequential}
               ref={this.updateRippleRef}
             />
           </View>
