@@ -20,6 +20,18 @@ import styles from './styles';
 const minMargin = 8;
 const maxMargin = 16;
 
+const valuePropType = PropTypes
+  .oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]);
+
+const labelPropType = PropTypes
+  .oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]);
+
 export default class Dropdown extends PureComponent {
   static defaultProps = {
     disabled: false,
@@ -56,13 +68,11 @@ export default class Dropdown extends PureComponent {
     animationDuration: PropTypes.number,
     fontSize: PropTypes.number,
 
-    value: PropTypes.string,
+    value: valuePropType,
+
     data: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.string,
-      label: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.node,
-      ]),
+      value: valuePropType,
+      label: labelPropType,
     })),
 
     textColor: PropTypes.string,
@@ -355,7 +365,7 @@ export default class Dropdown extends PureComponent {
       ...props
     } = this.props;
 
-    let { label = value } = this.selectedItem() || {};
+    let { label = String(value) } = this.selectedItem() || {};
 
     if ('function' === typeof renderBase) {
       return renderBase({ ...props, label, value, renderAccessory });
