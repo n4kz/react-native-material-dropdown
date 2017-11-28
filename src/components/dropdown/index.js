@@ -117,6 +117,8 @@ export default class Dropdown extends PureComponent {
     let { value } = this.props;
 
     this.mounted = false;
+    this.focused = false;
+
     this.state = {
       opacity: new Animated.Value(0),
       selected: -1,
@@ -170,6 +172,8 @@ export default class Dropdown extends PureComponent {
     if (!itemCount) {
       return;
     }
+
+    this.focused = true;
 
     if ('function' === typeof onFocus) {
       onFocus();
@@ -282,6 +286,8 @@ export default class Dropdown extends PureComponent {
         toValue: 0,
       })
       .start(() => {
+        this.focused = false;
+
         if ('function' === typeof onBlur) {
           onBlur();
         }
@@ -306,7 +312,7 @@ export default class Dropdown extends PureComponent {
   }
 
   isFocused() {
-    return this.state.modal;
+    return this.focused;
   }
 
   selectedIndex() {
