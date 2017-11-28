@@ -63,6 +63,8 @@ export default class Dropdown extends PureComponent {
   };
 
   static propTypes = {
+    ...TouchableWithoutFeedback.propTypes,
+
     disabled: PropTypes.bool,
 
     rippleCentered: PropTypes.bool,
@@ -484,6 +486,13 @@ export default class Dropdown extends PureComponent {
       rippleCentered,
       rippleSequential,
 
+      hitSlop,
+      pressRetentionOffset,
+      testID,
+      nativeID,
+      accessible,
+      accessibilityLabel,
+
       ...props
     } = this.props;
 
@@ -556,7 +565,13 @@ export default class Dropdown extends PureComponent {
 
     let touchableProps = {
       disabled,
+      hitSlop,
+      pressRetentionOffset,
       onPress: this.onPress,
+      testID,
+      nativeID,
+      accessible,
+      accessibilityLabel,
     };
 
     return (
