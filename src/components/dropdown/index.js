@@ -34,6 +34,8 @@ const labelPropType = PropTypes
 
 export default class Dropdown extends PureComponent {
   static defaultProps = {
+    hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
+
     disabled: false,
 
     rippleCentered: false,
