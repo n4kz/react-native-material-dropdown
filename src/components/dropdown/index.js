@@ -391,15 +391,15 @@ export default class Dropdown extends PureComponent {
     let { value } = this.state;
     let { renderBase, renderAccessory = this.renderAccessory } = this.props;
 
-    let { label = String(value) } = this.selectedItem() || {};
+    let { label = value } = this.selectedItem() || {};
 
     if ('function' === typeof renderBase) {
       return renderBase({ ...props, label, value, renderAccessory });
     }
 
-    let title = 'string' === typeof label?
-        label:
-        value;
+    let title = null == label || 'string' === typeof label?
+      label:
+      String(label);
 
     return (
       <TextField
