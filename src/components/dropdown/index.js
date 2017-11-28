@@ -100,6 +100,7 @@ export default class Dropdown extends PureComponent {
 
     labelHeight: PropTypes.number,
 
+    onLayout: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onChangeText: PropTypes.func,
@@ -119,6 +120,7 @@ export default class Dropdown extends PureComponent {
     this.onPress = this.onPress.bind(this);
     this.onClose = this.onClose.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.onLayout = this.onLayout.bind(this);
     this.updateRippleRef = this.updateRef.bind(this, 'ripple');
     this.updateContainerRef = this.updateRef.bind(this, 'container');
     this.updateScrollRef = this.updateRef.bind(this, 'scroll');
@@ -322,6 +324,14 @@ export default class Dropdown extends PureComponent {
     }
 
     setTimeout(this.onClose, animationDuration);
+  }
+
+  onLayout(event) {
+    let { onLayout } = this.props;
+
+    if ('function' === typeof onLayout) {
+      onLayout(event);
+    }
   }
 
   isFocused() {
@@ -543,7 +553,7 @@ export default class Dropdown extends PureComponent {
     };
 
     return (
-      <View onLayout={() => undefined} ref={this.updateContainerRef} style={containerStyle}>
+      <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle}>
         <TouchableWithoutFeedback onPress={this.onPress}>
           <View pointerEvents='box-only'>
             {this.renderBase()}
