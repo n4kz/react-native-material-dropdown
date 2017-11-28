@@ -4,6 +4,7 @@
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-material-dropdown/master/license.txt
 [example-url]: https://user-images.githubusercontent.com/2055622/27727487-591a807a-5d87-11e7-89f6-f31a442db0c6.gif
 [textinput]: https://facebook.github.io/react-native/docs/textinput.html#props
+[touchable]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
 [textfield]: https://github.com/n4kz/react-native-material-textfield#properties
 
 # react-native-material-dropdown
@@ -81,11 +82,12 @@ class Example extends Component {
  shadeOpacity      | Shade opacity for dropdown items              |   Number | 0.12
  rippleOpacity     | Opacity for ripple effect                     |   Number | 0.54
  rippleInsets      | Insets for ripple on base component           |   Object | { top: 16, bottom: -8 }
+ rippleCentered    | Ripple on base component should be centered   |  Boolean | false
  renderBase        | Render base component                         | Function | -
  renderAccessory   | Render text field accessory                   | Function | -
  onChangeText      | Selection callback (args: value, index, data) | Function | -
 
-Other [TextField][textfield] and [TextInput][textinput] properties will also work
+Other [TextField][textfield], [TextInput][textinput] and [TouchableWithoutFeedback][touchable] properties will also work
 
 ## Methods
 
