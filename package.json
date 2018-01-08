@@ -1,6 +1,6 @@
 {
   "name": "react-native-material-dropdown",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "license": "BSD-3-Clause",
   "author": "Alexander Nazarov <n4kz@n4kz.com>",
 
@@ -43,6 +43,6 @@
     "prop-types": "^15.5.9",
     "react-native-material-buttons": "^0.5.0",
     "react-native-material-ripple": "^0.7.0",
-    "react-native-material-textfield": "^0.10.0"
+    "react-native-material-textfield": "^0.11.0"
   }
 }
