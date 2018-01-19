@@ -10,6 +10,7 @@ import {
   Dimensions,
   Platform,
   ViewPropTypes,
+  I18nManager,
 } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 import { TextField } from 'react-native-material-textfield';
@@ -472,6 +473,10 @@ export default class Dropdown extends PureComponent {
       },
     };
 
+    let textAlign = I18nManager.isRTL?
+      'left':
+      'right';
+
     return data
       .map((item, index) => {
         let value = valueExtractor(item, index);
@@ -487,7 +492,7 @@ export default class Dropdown extends PureComponent {
             itemColor:
           selectedItemColor;
 
-        let style = { color, fontSize };
+        let style = { color, fontSize, textAlign };
 
         return (
           <DropdownItem index={index} key={index} {...props}>
