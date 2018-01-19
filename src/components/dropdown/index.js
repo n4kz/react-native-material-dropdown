@@ -20,23 +20,14 @@ import styles from './styles';
 const minMargin = 8;
 const maxMargin = 16;
 
-const valuePropType = PropTypes
-  .oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]);
-
-const labelPropType = PropTypes
-  .oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]);
-
 export default class Dropdown extends PureComponent {
   static defaultProps = {
     hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
 
     disabled: false,
+
+    valueExtractor: ({ value } = {}, index) => value,
+    labelExtractor: ({ label } = {}, index) => label,
 
     rippleCentered: false,
     rippleSequential: true,
@@ -69,6 +60,16 @@ export default class Dropdown extends PureComponent {
 
     disabled: PropTypes.bool,
 
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+
+    data: PropTypes.arrayOf(PropTypes.object),
+
+    valueExtractor: PropTypes.func,
+    labelExtractor: PropTypes.func,
+
     rippleCentered: PropTypes.bool,
     rippleSequential: PropTypes.bool,
 
@@ -84,13 +85,6 @@ export default class Dropdown extends PureComponent {
 
     animationDuration: PropTypes.number,
     fontSize: PropTypes.number,
-
-    value: valuePropType,
-
-    data: PropTypes.arrayOf(PropTypes.shape({
-      value: valuePropType,
-      label: labelPropType,
-    })),
 
     textColor: PropTypes.string,
     itemColor: PropTypes.string,
@@ -318,8 +312,8 @@ export default class Dropdown extends PureComponent {
   }
 
   onSelect(index) {
-    let { data, onChangeText, animationDuration } = this.props;
-    let { value } = data[index];
+    let { data, valueExtractor, onChangeText, animationDuration } = this.props;
+    let value = valueExtractor(data[index], index);
 
     this.setState({ value });
 
@@ -343,17 +337,17 @@ export default class Dropdown extends PureComponent {
   }
 
   selectedIndex() {
-    let { data = [] } = this.props;
+    let { value } = this.state;
+    let { data = [], valueExtractor } = this.props;
 
     return data
-      .findIndex(({ value }) => value === this.state.value);
+      .findIndex((item, index) => value === valueExtractor(item, index));
   }
 
   selectedItem() {
     let { data = [] } = this.props;
 
-    return data
-      .find(({ value }) => value === this.state.value);
+    return data[this.selectedIndex()];
   }
 
   itemSize() {
@@ -389,9 +383,23 @@ export default class Dropdown extends PureComponent {
 
   renderBase(props) {
     let { value } = this.state;
-    let { renderBase, renderAccessory = this.renderAccessory } = this.props;
+    let {
+      data = [],
+      renderBase,
+      labelExtractor,
+      renderAccessory = this.renderAccessory,
+    } = this.props;
 
-    let { label = value } = this.selectedItem() || {};
+    let index = this.selectedIndex();
+    let label;
+
+    if (~index) {
+      label = labelExtractor(data[index], index);
+    }
+
+    if (null == label) {
+      label = value;
+    }
 
     if ('function' === typeof renderBase) {
       return renderBase({ ...props, label, value, renderAccessory });
@@ -431,6 +439,8 @@ export default class Dropdown extends PureComponent {
 
     let {
       data = [],
+      valueExtractor,
+      labelExtractor,
       textColor,
       itemColor,
       selectedItemColor = textColor,
@@ -457,7 +467,14 @@ export default class Dropdown extends PureComponent {
     };
 
     return data
-      .map(({ value, label = value }, index) => {
+      .map((item, index) => {
+        let value = valueExtractor(item, index);
+        let label = labelExtractor(item, index);
+
+        let title = null == label?
+          value:
+          label;
+
         let color = ~selected?
           index === selected?
             selectedItemColor:
@@ -469,7 +486,7 @@ export default class Dropdown extends PureComponent {
         return (
           <DropdownItem index={index} key={index} {...props}>
             <Text style={[itemTextStyle, style]} numberOfLines={1}>
-              {label}
+              {title}
             </Text>
           </DropdownItem>
         );
