@@ -2,6 +2,8 @@
 [npm-url]: https://npmjs.com/package/react-native-material-dropdown
 [license-badge]: https://img.shields.io/npm/l/react-native-material-dropdown.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-material-dropdown/master/license.txt
+[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/n4kz/react-native-material-dropdown.svg
+[codeclimate-url]: https://codeclimate.com/github/n4kz/react-native-material-dropdown
 [example-url]: https://user-images.githubusercontent.com/2055622/27727487-591a807a-5d87-11e7-89f6-f31a442db0c6.gif
 [textinput]: https://facebook.github.io/react-native/docs/textinput.html#props
 [touchable]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
@@ -11,6 +13,7 @@
 
 [![npm][npm-badge]][npm-url]
 [![license][license-badge]][license-url]
+[![codeclimate][codeclimate-badge]][codeclimate-url]
 
 Material dropdown with consistent behaviour on iOS and Android
 
