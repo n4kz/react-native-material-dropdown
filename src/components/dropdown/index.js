@@ -332,8 +332,10 @@ export default class Dropdown extends PureComponent {
     }
   }
 
-  isFocused() {
-    return this.focused;
+  value() {
+    let { value } = this.state;
+
+    return value;
   }
 
   selectedIndex() {
@@ -348,6 +350,10 @@ export default class Dropdown extends PureComponent {
     let { data = [] } = this.props;
 
     return data[this.selectedIndex()];
+  }
+
+  isFocused() {
+    return this.focused;
   }
 
   itemSize() {
