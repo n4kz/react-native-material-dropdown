@@ -88,6 +88,8 @@ class Example extends Component {
  rippleCentered    | Ripple on base component should be centered   |  Boolean | false
  renderBase        | Render base component                         | Function | -
  renderAccessory   | Render text field accessory                   | Function | -
+ valueExtractor    | Extract value from item (args: item, index)   | Function | ({ value }) => value
+ labelExtractor    | Extract label from item (args: item, index)   | Function | ({ label }) => label
  onChangeText      | Selection callback (args: value, index, data) | Function | -
 
 Other [TextField][textfield], [TextInput][textinput] and [TouchableWithoutFeedback][touchable] properties will also work
