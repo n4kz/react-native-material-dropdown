@@ -32,6 +32,8 @@ export default class Dropdown extends PureComponent {
     valueExtractor: ({ value } = {}, index) => value,
     labelExtractor: ({ label } = {}, index) => label,
 
+    absoluteRTLLayout: false,
+
     rippleCentered: false,
     rippleSequential: true,
 
@@ -72,6 +74,8 @@ export default class Dropdown extends PureComponent {
 
     valueExtractor: PropTypes.func,
     labelExtractor: PropTypes.func,
+
+    absoluteRTLLayout: PropTypes.bool,
 
     rippleCentered: PropTypes.bool,
     rippleSequential: PropTypes.bool,
@@ -166,6 +170,7 @@ export default class Dropdown extends PureComponent {
       itemPadding,
       dropdownPosition,
       animationDuration,
+      absoluteRTLLayout,
     } = this.props;
 
     if (disabled) {
@@ -199,6 +204,11 @@ export default class Dropdown extends PureComponent {
 
     this.container.measureInWindow((x, y, containerWidth, containerHeight) => {
       let { opacity } = this.state;
+
+      /* Adjust coordinates for relative layout in RTL locale */
+      if (I18nManager.isRTL && !absoluteRTLLayout) {
+        x = dimensions.width - (x + containerWidth);
+      }
 
       let delay = Math.max(0, animationDuration - (Date.now() - timestamp));
       let selected = this.selectedIndex();
