@@ -27,6 +27,8 @@ export default class Dropdown extends PureComponent {
 
     disabled: false,
 
+    data: [],
+
     valueExtractor: ({ value } = {}, index) => value,
     labelExtractor: ({ label } = {}, index) => label,
 
@@ -157,7 +159,7 @@ export default class Dropdown extends PureComponent {
 
   onPress(event) {
     let {
-      data = [],
+      data,
       disabled,
       onFocus,
       labelHeight,
@@ -341,14 +343,14 @@ export default class Dropdown extends PureComponent {
 
   selectedIndex() {
     let { value } = this.state;
-    let { data = [], valueExtractor } = this.props;
+    let { data, valueExtractor } = this.props;
 
     return data
       .findIndex((item, index) => null != item && value === valueExtractor(item, index));
   }
 
   selectedItem() {
-    let { data = [] } = this.props;
+    let { data } = this.props;
 
     return data[this.selectedIndex()];
   }
@@ -364,7 +366,7 @@ export default class Dropdown extends PureComponent {
   }
 
   visibleItemCount() {
-    let { data = [], itemCount } = this.props;
+    let { data, itemCount } = this.props;
 
     return Math.min(data.length, itemCount);
   }
@@ -391,7 +393,7 @@ export default class Dropdown extends PureComponent {
   renderBase(props) {
     let { value } = this.state;
     let {
-      data = [],
+      data,
       renderBase,
       labelExtractor,
       renderAccessory = this.renderAccessory,
@@ -445,7 +447,7 @@ export default class Dropdown extends PureComponent {
     let { selected, leftInset, rightInset } = this.state;
 
     let {
-      data = [],
+      data,
       valueExtractor,
       labelExtractor,
       textColor,
@@ -531,7 +533,7 @@ export default class Dropdown extends PureComponent {
     } = this.props;
 
     let {
-      data = [],
+      data,
       disabled,
       baseColor,
       itemPadding,
