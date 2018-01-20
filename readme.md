@@ -26,6 +26,7 @@ Material dropdown with consistent behaviour on iOS and Android
 * Customizable font size, colors and animation duration
 * Dynamic dropdown size and position
 * Configurable visible item count
+* RTL support
 * Pure javascript implementation
 
 ## Installation
@@ -78,7 +79,8 @@ class Example extends Component {
  itemCount         | Dropdown visible item count                   |   Number | 4
  itemPadding       | Dropdown item vertical padding                |   Number | 8
  itemTextStyle     | Dropdown item text styles                     |   Object | -
- data              | Dropdown item data                            |   Object | -
+ dropdownMargins   | Dropdown margins                              |   Object | { min: 8, max: 16 }
+ data              | Dropdown item data                            |    Array | []
  value             | Selected value                                |   String | -
  containerStyle    | Styles for container view                     |   Object | -
  pickerStyle       | Styles for item picker view                   |   Object | -
