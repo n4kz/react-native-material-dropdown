@@ -344,7 +344,7 @@ export default class Dropdown extends PureComponent {
     let { data = [], valueExtractor } = this.props;
 
     return data
-      .findIndex((item, index) => value === valueExtractor(item, index));
+      .findIndex((item, index) => null != item && value === valueExtractor(item, index));
   }
 
   selectedItem() {
@@ -479,6 +479,10 @@ export default class Dropdown extends PureComponent {
 
     return data
       .map((item, index) => {
+        if (null == item) {
+          return null;
+        }
+
         let value = valueExtractor(item, index);
         let label = labelExtractor(item, index);
 
