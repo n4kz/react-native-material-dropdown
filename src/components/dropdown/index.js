@@ -18,9 +18,6 @@ import { TextField } from 'react-native-material-textfield';
 import DropdownItem from '../item';
 import styles from './styles';
 
-const minMargin = 8;
-const maxMargin = 16;
-
 export default class Dropdown extends PureComponent {
   static defaultProps = {
     hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
@@ -33,6 +30,11 @@ export default class Dropdown extends PureComponent {
     labelExtractor: ({ label } = {}, index) => label,
 
     absoluteRTLLayout: false,
+
+    dropdownMargins: {
+      min: 8,
+      max: 16,
+    },
 
     rippleCentered: false,
     rippleSequential: true,
@@ -77,6 +79,13 @@ export default class Dropdown extends PureComponent {
 
     absoluteRTLLayout: PropTypes.bool,
 
+    dropdownMargins: PropTypes.shape({
+      min: PropTypes.number.isRequired,
+      max: PropTypes.number.isRequired,
+    }),
+
+    dropdownPosition: PropTypes.number,
+
     rippleCentered: PropTypes.bool,
     rippleSequential: PropTypes.bool,
 
@@ -115,8 +124,6 @@ export default class Dropdown extends PureComponent {
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
     pickerStyle: (ViewPropTypes || View.propTypes).style,
-
-    dropdownPosition: PropTypes.number,
   };
 
   constructor(props) {
@@ -168,6 +175,7 @@ export default class Dropdown extends PureComponent {
       onFocus,
       labelHeight,
       itemPadding,
+      dropdownMargins: { min: minMargin, max: maxMargin },
       dropdownPosition,
       animationDuration,
       absoluteRTLLayout,
