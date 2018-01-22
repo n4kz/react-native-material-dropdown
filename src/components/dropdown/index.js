@@ -493,10 +493,6 @@ export default class Dropdown extends PureComponent {
       },
     };
 
-    let textAlign = I18nManager.isRTL?
-      'left':
-      'right';
-
     return data
       .map((item, index) => {
         if (null == item) {
@@ -516,11 +512,11 @@ export default class Dropdown extends PureComponent {
             itemColor:
           selectedItemColor;
 
-        let style = { color, fontSize, textAlign };
+        let style = { color, fontSize };
 
         return (
           <DropdownItem index={index} key={index} {...props}>
-            <Text style={[itemTextStyle, style]} numberOfLines={1}>
+            <Text style={[styles.item, itemTextStyle, style]} numberOfLines={1}>
               {title}
             </Text>
           </DropdownItem>
