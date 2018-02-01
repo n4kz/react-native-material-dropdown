@@ -448,6 +448,36 @@ export default class Dropdown extends PureComponent {
     );
   }
 
+  renderRipple() {
+    let {
+      baseColor,
+      animationDuration,
+      rippleOpacity,
+      rippleCentered,
+      rippleSequential,
+    } = this.props;
+
+    let { bottom, ...insets } = this.rippleInsets();
+    let style = {
+      ...insets,
+
+      height: this.itemSize() - bottom,
+      position: 'absolute',
+    };
+
+    return (
+      <Ripple
+        style={style}
+        rippleColor={baseColor}
+        rippleDuration={animationDuration * 2}
+        rippleOpacity={rippleOpacity}
+        rippleCentered={rippleCentered}
+        rippleSequential={rippleSequential}
+        ref={this.updateRippleRef}
+      />
+    );
+  }
+
   renderAccessory() {
     let { baseColor: backgroundColor } = this.props;
     let triangleStyle = { backgroundColor };
@@ -549,10 +579,8 @@ export default class Dropdown extends PureComponent {
     let {
       data,
       disabled,
-      baseColor,
       itemPadding,
       dropdownPosition,
-      animationDuration,
     } = props;
 
     let { left, top, width, opacity, selected, modal } = this.state;
@@ -605,14 +633,6 @@ export default class Dropdown extends PureComponent {
       transform: [{ translateY }],
     };
 
-    let { bottom, ...insets } = this.rippleInsets();
-    let rippleStyle = {
-      ...insets,
-
-      height: itemSize - bottom,
-      position: 'absolute',
-    };
-
     let touchableProps = {
       disabled,
       hitSlop,
@@ -629,16 +649,7 @@ export default class Dropdown extends PureComponent {
         <TouchableWithoutFeedback {...touchableProps}>
           <View pointerEvents='box-only'>
             {this.renderBase(props)}
-
-            <Ripple
-              style={rippleStyle}
-              rippleColor={baseColor}
-              rippleDuration={animationDuration * 2}
-              rippleOpacity={rippleOpacity}
-              rippleCentered={rippleCentered}
-              rippleSequential={rippleSequential}
-              ref={this.updateRippleRef}
-            />
+            {this.renderRipple()}
           </View>
         </TouchableWithoutFeedback>
 
