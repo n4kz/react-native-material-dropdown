@@ -60,6 +60,14 @@ export default class Dropdown extends PureComponent {
     itemPadding: 8,
 
     labelHeight: 32,
+
+    supportedOrientations: [
+      'portrait',
+      'portrait-upside-down',
+      'landscape',
+      'landscape-left',
+      'landscape-right',
+    ],
   };
 
   static propTypes = {
@@ -124,6 +132,8 @@ export default class Dropdown extends PureComponent {
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
     pickerStyle: (ViewPropTypes || View.propTypes).style,
+
+    supportedOrientations: PropTypes.arrayOf(PropTypes.string),
   };
 
   constructor(props) {
@@ -573,6 +583,8 @@ export default class Dropdown extends PureComponent {
       accessible,
       accessibilityLabel,
 
+      supportedOrientations,
+
       ...props
     } = this.props;
 
@@ -653,7 +665,12 @@ export default class Dropdown extends PureComponent {
           </View>
         </TouchableWithoutFeedback>
 
-        <Modal visible={modal} transparent={true} onRequestClose={this.onClose}>
+        <Modal
+          visible={modal}
+          transparent={true}
+          onRequestClose={this.onClose}
+          supportedOrientations={supportedOrientations}
+        >
           <TouchableWithoutFeedback onPress={this.onClose}>
             <View style={overlayStyle}>
               <Animated.View
