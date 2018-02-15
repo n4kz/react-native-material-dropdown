@@ -18,6 +18,10 @@ import { TextField } from 'react-native-material-textfield';
 import DropdownItem from '../item';
 import styles from './styles';
 
+
+
+const DefaultAnimationDuration = 225;
+
 export default class Dropdown extends PureComponent {
   static defaultProps = {
     hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
@@ -36,8 +40,10 @@ export default class Dropdown extends PureComponent {
       max: 16,
     },
 
+    rippleDisabled: false,
     rippleCentered: false,
     rippleSequential: true,
+    rippleDuration: DefaultAnimationDuration * 2,
 
     rippleInsets: {
       top: 16,
@@ -49,7 +55,8 @@ export default class Dropdown extends PureComponent {
     rippleOpacity: 0.54,
     shadeOpacity: 0.12,
 
-    animationDuration: 225,
+    animationDuration: DefaultAnimationDuration,
+    animationDelay: DefaultAnimationDuration,
     fontSize: 16,
 
     textColor: 'rgba(0, 0, 0, .87)',
@@ -108,6 +115,7 @@ export default class Dropdown extends PureComponent {
     shadeOpacity: PropTypes.number,
 
     animationDuration: PropTypes.number,
+    animationDelay: PropTypes.number,
     fontSize: PropTypes.number,
 
     textColor: PropTypes.string,
@@ -187,7 +195,9 @@ export default class Dropdown extends PureComponent {
       itemPadding,
       dropdownMargins: { min: minMargin, max: maxMargin },
       dropdownPosition,
+      rippleDisabled,
       animationDuration,
+      animationDelay,
       absoluteRTLLayout,
     } = this.props;
 
@@ -205,7 +215,7 @@ export default class Dropdown extends PureComponent {
       event.nativeEvent.locationY -= this.rippleInsets().top;
 
       /* Start ripple directly from event */
-      this.ripple.startRipple(event);
+      !rippleDisabled && this.ripple.startRipple(event);
     }
 
     if (!itemCount) {
@@ -228,7 +238,8 @@ export default class Dropdown extends PureComponent {
         x = dimensions.width - (x + containerWidth);
       }
 
-      let delay = Math.max(0, animationDuration - (Date.now() - timestamp));
+      let measureTime = Date.now() - timestamp;
+      let delay = Math.max(0, animationDelay - measureTime);
       let selected = this.selectedIndex();
       let offset = 0;
 
@@ -462,6 +473,8 @@ export default class Dropdown extends PureComponent {
     let {
       baseColor,
       animationDuration,
+      rippleDisabled,
+      rippleDuration,
       rippleOpacity,
       rippleCentered,
       rippleSequential,
@@ -477,9 +490,10 @@ export default class Dropdown extends PureComponent {
 
     return (
       <Ripple
+        disabled={rippleDisabled}
         style={style}
         rippleColor={baseColor}
-        rippleDuration={animationDuration * 2}
+        rippleDuration={rippleDuration}
         rippleOpacity={rippleOpacity}
         rippleCentered={rippleCentered}
         rippleSequential={rippleSequential}
@@ -487,6 +501,7 @@ export default class Dropdown extends PureComponent {
       />
     );
   }
+
 
   renderAccessory() {
     let { baseColor: backgroundColor } = this.props;
