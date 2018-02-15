@@ -202,7 +202,6 @@ export default class Dropdown extends PureComponent {
       rippleDuration,
       dropdownOffset,
       dropdownMargins: { min: minMargin, max: maxMargin },
-      dropdownPosition,
       animationDuration,
       absoluteRTLLayout,
     } = this.props;
@@ -212,8 +211,6 @@ export default class Dropdown extends PureComponent {
     }
 
     let itemCount = data.length;
-    let visibleItemCount = this.visibleItemCount();
-    let tailItemCount = this.tailItemCount();
     let timestamp = Date.now();
 
     if (null != event) {
@@ -246,35 +243,6 @@ export default class Dropdown extends PureComponent {
 
       let delay = Math.max(0, rippleDuration - animationDuration - (Date.now() - timestamp));
       let selected = this.selectedIndex();
-      let offset = 0;
-
-      if (itemCount > visibleItemCount) {
-        if (null == dropdownPosition) {
-          switch (selected) {
-            case -1:
-              break;
-
-            case 0:
-            case 1:
-              break;
-
-            default:
-              if (selected >= itemCount - tailItemCount) {
-                offset = this.itemSize() * (itemCount - visibleItemCount);
-              } else {
-                offset = this.itemSize() * (selected - 1);
-              }
-          }
-        } else {
-          if (~selected) {
-            if (dropdownPosition < 0) {
-              offset = this.itemSize() * (selected - visibleItemCount - dropdownPosition);
-            } else {
-              offset = this.itemSize() * (selected - dropdownPosition);
-            }
-          }
-        }
-      }
 
       let leftInset;
       let left = x
@@ -315,9 +283,7 @@ export default class Dropdown extends PureComponent {
 
       setTimeout((() => {
         if (this.mounted) {
-          if (this.scroll) {
-            this.scroll.scrollToOffset({ offset, animated: false });
-          }
+          this.resetScrollOffset();
 
           Animated
             .timing(opacity, {
@@ -430,6 +396,49 @@ export default class Dropdown extends PureComponent {
     } = this.props.rippleInsets || {};
 
     return { top, right, bottom, left };
+  }
+
+  resetScrollOffset() {
+    let { selected } = this.state;
+    let { data, dropdownPosition } = this.props;
+
+    let offset = 0;
+    let itemCount = data.length;
+    let itemSize = this.itemSize();
+    let tailItemCount = this.tailItemCount();
+    let visibleItemCount = this.visibleItemCount();
+
+    if (itemCount > visibleItemCount) {
+      if (null == dropdownPosition) {
+        switch (selected) {
+          case -1:
+            break;
+
+          case 0:
+          case 1:
+            break;
+
+          default:
+            if (selected >= itemCount - tailItemCount) {
+              offset = itemSize * (itemCount - visibleItemCount);
+            } else {
+              offset = itemSize * (selected - 1);
+            }
+        }
+      } else {
+        if (~selected) {
+          if (dropdownPosition < 0) {
+            offset = itemSize * (selected - visibleItemCount - dropdownPosition);
+          } else {
+            offset = itemSize * (selected - dropdownPosition);
+          }
+        }
+      }
+    }
+
+    if (this.scroll) {
+      this.scroll.scrollToOffset({ offset, animated: false });
+    }
   }
 
   updateRef(name, ref) {
