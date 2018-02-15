@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import {
   Text,
   View,
-  ScrollView,
+  FlatList,
   Animated,
   Modal,
   TouchableWithoutFeedback,
@@ -149,10 +149,15 @@ export default class Dropdown extends PureComponent {
     this.onClose = this.onClose.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.onLayout = this.onLayout.bind(this);
+
     this.updateRippleRef = this.updateRef.bind(this, 'ripple');
     this.updateContainerRef = this.updateRef.bind(this, 'container');
     this.updateScrollRef = this.updateRef.bind(this, 'scroll');
+
     this.renderAccessory = this.renderAccessory.bind(this);
+    this.renderItem = this.renderItem.bind(this);
+
+    this.keyExtractor = this.keyExtractor.bind(this);
 
     this.blur = this.onClose;
     this.focus = this.onPress;
@@ -306,7 +311,7 @@ export default class Dropdown extends PureComponent {
       setTimeout((() => {
         if (this.mounted) {
           if (this.scroll) {
-            this.scroll.scrollTo({ x: 0, y: offset, animated: false });
+            this.scroll.scrollToOffset({ offset, animated: false });
           }
 
           Animated
@@ -426,6 +431,12 @@ export default class Dropdown extends PureComponent {
     this[name] = ref;
   }
 
+  keyExtractor(item, index) {
+    let { valueExtractor } = this.props;
+
+    return `${index}-${valueExtractor(item, index)}`;
+  }
+
   renderBase(props) {
     let { value } = this.state;
     let {
@@ -512,11 +523,10 @@ export default class Dropdown extends PureComponent {
     );
   }
 
-  renderItems() {
+  renderItem({ item, index }) {
     let { selected, leftInset, rightInset } = this.state;
 
     let {
-      data,
       valueExtractor,
       labelExtractor,
       textColor,
@@ -544,35 +554,32 @@ export default class Dropdown extends PureComponent {
       },
     };
 
-    return data
-      .map((item, index) => {
-        if (null == item) {
-          return null;
-        }
+    if (null == item) {
+      return null;
+    }
 
-        let value = valueExtractor(item, index);
-        let label = labelExtractor(item, index);
+    let value = valueExtractor(item, index);
+    let label = labelExtractor(item, index);
 
-        let title = null == label?
-          value:
-          label;
+    let title = null == label?
+      value:
+      label;
 
-        let color = ~selected?
-          index === selected?
-            selectedItemColor:
-            itemColor:
-          selectedItemColor;
+    let color = ~selected?
+      index === selected?
+        selectedItemColor:
+        itemColor:
+      selectedItemColor;
 
-        let style = { color, fontSize };
+    let style = { color, fontSize };
 
-        return (
-          <DropdownItem index={index} key={index} {...props}>
-            <Text style={[styles.item, itemTextStyle, style]} numberOfLines={1}>
-              {title}
-            </Text>
-          </DropdownItem>
-        );
-      });
+    return (
+      <DropdownItem index={index} {...props}>
+        <Text style={[styles.item, itemTextStyle, style]} numberOfLines={1}>
+          {title}
+        </Text>
+      </DropdownItem>
+    );
   }
 
   render() {
@@ -687,14 +694,15 @@ export default class Dropdown extends PureComponent {
               <Animated.View
                 style={[styles.picker, pickerStyle, pickerStyleOverrides]}
               >
-                <ScrollView
+                <FlatList
                   ref={this.updateScrollRef}
+                  data={data}
                   style={styles.scroll}
+                  renderItem={this.renderItem}
+                  keyExtractor={this.keyExtractor}
                   scrollEnabled={visibleItemCount < itemCount}
                   contentContainerStyle={styles.scrollContainer}
-                >
-                  {this.renderItems()}
-                </ScrollView>
+                />
               </Animated.View>
             </View>
           </TouchableWithoutFeedback>
