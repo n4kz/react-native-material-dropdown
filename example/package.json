@@ -7,8 +7,8 @@
     "android": "node node_modules/react-native/local-cli/cli.js run-android"
   },
   "dependencies": {
-    "react": "16.0.0",
-    "react-native": "0.50.4",
+    "react": "16.2.0",
+    "react-native": "0.53.0",
     "react-native-material-dropdown": "file:../"
   },
   "devDependencies": {
