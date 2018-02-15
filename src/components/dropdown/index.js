@@ -31,6 +31,11 @@ export default class Dropdown extends PureComponent {
 
     absoluteRTLLayout: false,
 
+    dropdownOffset: {
+      top: 32,
+      left: 0,
+    },
+
     dropdownMargins: {
       min: 8,
       max: 16,
@@ -59,8 +64,6 @@ export default class Dropdown extends PureComponent {
     itemCount: 4,
     itemPadding: 8,
 
-    labelHeight: 32,
-
     supportedOrientations: [
       'portrait',
       'portrait-upside-down',
@@ -86,6 +89,11 @@ export default class Dropdown extends PureComponent {
     labelExtractor: PropTypes.func,
 
     absoluteRTLLayout: PropTypes.bool,
+
+    dropdownOffset: PropTypes.shape({
+      top: PropTypes.number.isRequired,
+      left: PropTypes.number.isRequired,
+    }),
 
     dropdownMargins: PropTypes.shape({
       min: PropTypes.number.isRequired,
@@ -119,8 +127,6 @@ export default class Dropdown extends PureComponent {
 
     itemCount: PropTypes.number,
     itemPadding: PropTypes.number,
-
-    labelHeight: PropTypes.number,
 
     onLayout: PropTypes.func,
     onFocus: PropTypes.func,
@@ -183,8 +189,8 @@ export default class Dropdown extends PureComponent {
       data,
       disabled,
       onFocus,
-      labelHeight,
       itemPadding,
+      dropdownOffset,
       dropdownMargins: { min: minMargin, max: maxMargin },
       dropdownPosition,
       animationDuration,
@@ -260,8 +266,10 @@ export default class Dropdown extends PureComponent {
         }
       }
 
-      let left = x - maxMargin;
       let leftInset;
+      let left = x
+        + dropdownOffset.left
+        - maxMargin;
 
       if (left > minMargin) {
         leftInset = maxMargin;
@@ -282,7 +290,7 @@ export default class Dropdown extends PureComponent {
 
       let top = y
         + Platform.select({ ios: 1, android: 2 })
-        + labelHeight
+        + dropdownOffset.top
         - itemPadding;
 
       this.setState({
@@ -424,6 +432,7 @@ export default class Dropdown extends PureComponent {
       data,
       renderBase,
       labelExtractor,
+      dropdownOffset,
       renderAccessory = this.renderAccessory,
     } = this.props;
 
@@ -448,6 +457,8 @@ export default class Dropdown extends PureComponent {
 
     return (
       <TextField
+        labelHeight={dropdownOffset.top}
+
         {...props}
 
         value={title}
