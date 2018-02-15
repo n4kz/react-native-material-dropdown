@@ -70,7 +70,6 @@ class Example extends Component {
  animationDuration | Text field animation duration in ms           |   Number | 225
  fontSize          | Text field font size                          |   Number | 16
  labelFontSize     | Text field label font size                    |   Number | 12
- labelHeight       | Text field label height                       |   Number | 32
  baseColor         | Text field base color                         |   String | rgba(0, 0, 0, .38)
  textColor         | Text field text color                         |   String | rgba(0, 0, 0, .87)
  itemColor         | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
@@ -79,6 +78,7 @@ class Example extends Component {
  itemCount         | Dropdown visible item count                   |   Number | 4
  itemPadding       | Dropdown item vertical padding                |   Number | 8
  itemTextStyle     | Dropdown item text styles                     |   Object | -
+ dropdownOffset    | Dropdown offset                               |   Object | { top: 32, left: 0 }
  dropdownMargins   | Dropdown margins                              |   Object | { min: 8, max: 16 }
  data              | Dropdown item data                            |    Array | []
  value             | Selected value                                |   String | -
