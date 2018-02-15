@@ -474,7 +474,7 @@ export default class Dropdown extends PureComponent {
     }
 
     if ('function' === typeof renderBase) {
-      return renderBase({ ...props, label, value, renderAccessory });
+      return renderBase({ props, label, value, renderAccessory });
     }
 
     let title = null == label || 'string' === typeof label?
