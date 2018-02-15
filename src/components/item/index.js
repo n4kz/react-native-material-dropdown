@@ -24,7 +24,6 @@ export default class DropdownItem extends PureComponent {
 
     index: PropTypes.number.isRequired,
     baseColor: PropTypes.string.isRequired,
-    animationDuration: PropTypes.number,
   };
 
   constructor(props) {
@@ -42,20 +41,13 @@ export default class DropdownItem extends PureComponent {
   }
 
   render() {
-    let {
-      children,
-      style,
-      animationDuration,
-      baseColor,
-      ...props
-    } = this.props;
+    let { children, style, baseColor, ...props } = this.props;
 
     return (
       <Button
         {...props}
 
         style={[styles.container, style]}
-        rippleDuration={animationDuration * 2}
         rippleColor={baseColor}
         shadeColor={baseColor}
         onPress={this.onPress}

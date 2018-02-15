@@ -54,7 +54,9 @@ export default class Dropdown extends PureComponent {
     rippleOpacity: 0.54,
     shadeOpacity: 0.12,
 
+    rippleDuration: 400,
     animationDuration: 225,
+
     fontSize: 16,
 
     textColor: 'rgba(0, 0, 0, .87)',
@@ -115,7 +117,9 @@ export default class Dropdown extends PureComponent {
     rippleOpacity: PropTypes.number,
     shadeOpacity: PropTypes.number,
 
+    rippleDuration: PropTypes.number,
     animationDuration: PropTypes.number,
+
     fontSize: PropTypes.number,
 
     textColor: PropTypes.string,
@@ -195,6 +199,7 @@ export default class Dropdown extends PureComponent {
       disabled,
       onFocus,
       itemPadding,
+      rippleDuration,
       dropdownOffset,
       dropdownMargins: { min: minMargin, max: maxMargin },
       dropdownPosition,
@@ -239,7 +244,7 @@ export default class Dropdown extends PureComponent {
         x = dimensions.width - (x + containerWidth);
       }
 
-      let delay = Math.max(0, animationDuration - (Date.now() - timestamp));
+      let delay = Math.max(0, rippleDuration - animationDuration - (Date.now() - timestamp));
       let selected = this.selectedIndex();
       let offset = 0;
 
@@ -483,8 +488,8 @@ export default class Dropdown extends PureComponent {
   renderRipple() {
     let {
       baseColor,
-      animationDuration,
       rippleOpacity,
+      rippleDuration,
       rippleCentered,
       rippleSequential,
     } = this.props;
@@ -501,7 +506,7 @@ export default class Dropdown extends PureComponent {
       <Ripple
         style={style}
         rippleColor={baseColor}
-        rippleDuration={animationDuration * 2}
+        rippleDuration={rippleDuration}
         rippleOpacity={rippleOpacity}
         rippleCentered={rippleCentered}
         rippleSequential={rippleSequential}
@@ -535,15 +540,15 @@ export default class Dropdown extends PureComponent {
       baseColor,
       fontSize,
       itemTextStyle,
-      animationDuration,
       rippleOpacity,
+      rippleDuration,
       shadeOpacity,
     } = this.props;
 
     let props = {
       baseColor,
       fontSize,
-      animationDuration,
+      rippleDuration,
       rippleOpacity,
       shadeOpacity,
       onPress: this.onSelect,
