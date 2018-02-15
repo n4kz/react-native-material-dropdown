@@ -67,7 +67,8 @@ class Example extends Component {
 :----------------- |:--------------------------------------------- | --------:|:------------------
  label             | Text field label text (required)              |   String | -
  error             | Text field error text                         |   String | -
- animationDuration | Text field animation duration in ms           |   Number | 225
+ animationDuration | Dropdown opacity animation duration in ms     |   Number | 225
+ animationDelay    | Dropdown opacity animation delay in ms        |   Number | 225
  fontSize          | Text field font size                          |   Number | 16
  labelFontSize     | Text field label font size                    |   Number | 12
  labelHeight       | Text field label height                       |   Number | 32
@@ -85,9 +86,11 @@ class Example extends Component {
  containerStyle    | Styles for container view                     |   Object | -
  pickerStyle       | Styles for item picker view                   |   Object | -
  shadeOpacity      | Shade opacity for dropdown items              |   Number | 0.12
+ rippleDisabled    | Disable the ripple effect                     |  Boolean | false
  rippleOpacity     | Opacity for ripple effect                     |   Number | 0.54
  rippleInsets      | Insets for ripple on base component           |   Object | { top: 16, bottom: -8 }
  rippleCentered    | Ripple on base component should be centered   |  Boolean | false
+ rippleDuration    | Duration of the ripple effect                 |   Number | 450
  renderBase        | Render base component                         | Function | -
  renderAccessory   | Render text field accessory                   | Function | -
  valueExtractor    | Extract value from item (args: item, index)   | Function | ({ value }) => value
