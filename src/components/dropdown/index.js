@@ -32,7 +32,9 @@ export default class Dropdown extends PureComponent {
     absoluteRTLLayout: false,
 
     dropdownOffset: {
-      top: 32,
+      top: 32
+        /* XXX: Should be fixed in TextField */
+        + Platform.select({ ios: 1, android: 2 }),
       left: 0,
     },
 
@@ -58,6 +60,7 @@ export default class Dropdown extends PureComponent {
     animationDuration: 225,
 
     fontSize: 16,
+    labelHeight: 32,
 
     textColor: 'rgba(0, 0, 0, .87)',
     itemColor: 'rgba(0, 0, 0, .54)',
@@ -267,7 +270,6 @@ export default class Dropdown extends PureComponent {
       }
 
       let top = y
-        + Platform.select({ ios: 1, android: 2 })
         + dropdownOffset.top
         - itemPadding;
 
@@ -457,7 +459,6 @@ export default class Dropdown extends PureComponent {
       data,
       renderBase,
       labelExtractor,
-      dropdownOffset,
       renderAccessory = this.renderAccessory,
     } = this.props;
 
@@ -482,8 +483,6 @@ export default class Dropdown extends PureComponent {
 
     return (
       <TextField
-        labelHeight={dropdownOffset.top}
-
         {...props}
 
         value={title}
