@@ -408,7 +408,7 @@ export default class Dropdown extends PureComponent {
   itemSize() {
     let { fontSize, itemPadding } = this.props;
 
-    return fontSize * 1.5 + itemPadding * 2;
+    return Math.ceil(fontSize * 1.5 + itemPadding * 2);
   }
 
   visibleItemCount() {
