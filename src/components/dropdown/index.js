@@ -18,7 +18,7 @@ import { TextField } from 'react-native-material-textfield';
 import DropdownItem from '../item/index';
 import styles from './styles';
 
-export default class Dropdown extends PureComponent {
+export default class Dropdown extends React.Component {
   static defaultProps = {
     hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
 

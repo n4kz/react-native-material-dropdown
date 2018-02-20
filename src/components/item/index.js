@@ -5,7 +5,7 @@ import { Button } from 'react-native-material-buttons';
 
 import styles from './styles';
 
-export default class DropdownItem extends PureComponent {
+export default class DropdownItem extends React.Component {
   static defaultProps = {
     color: 'transparent',
     rippleContainerBorderRadius: 0,
