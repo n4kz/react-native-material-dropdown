@@ -15,10 +15,10 @@ import {
 import Ripple from 'react-native-material-ripple';
 import { TextField } from 'react-native-material-textfield';
 
-import DropdownItem from '../item/index';
+import DropdownItem from '../item';
 import styles from './styles';
 
-export default class Dropdown extends React.Component {
+export default class Dropdown extends PureComponent {
   static defaultProps = {
     hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
 
@@ -688,9 +688,8 @@ export default class Dropdown extends React.Component {
     };
 
     return (
-      <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle} accessible={false}>
-        <TouchableWithoutFeedback {...touchableProps}
-                                  accessible={false}>
+      <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle}>
+        <TouchableWithoutFeedback {...touchableProps}>
           <View pointerEvents='box-only'>
             {this.renderBase(props)}
             {this.renderRipple()}
@@ -703,15 +702,13 @@ export default class Dropdown extends React.Component {
           onRequestClose={this.onClose}
           supportedOrientations={supportedOrientations}
         >
-          <TouchableWithoutFeedback onPress={this.onClose}
-                                    accessible={false}>
+          <TouchableWithoutFeedback onPress={this.onClose}>
             <View style={overlayStyle}>
               <Animated.View
                 style={[styles.picker, pickerStyle, pickerStyleOverrides]}
               >
                 <FlatList
                   ref={this.updateScrollRef}
-                  accessible={false}
                   data={data}
                   style={styles.scroll}
                   renderItem={this.renderItem}
