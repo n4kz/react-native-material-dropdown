@@ -15,7 +15,7 @@ import {
 import Ripple from 'react-native-material-ripple';
 import { TextField } from 'react-native-material-textfield';
 
-import { DropdownItem } from '../item';
+import DropdownItem from '../item/index';
 import styles from './styles';
 
 export default class Dropdown extends PureComponent {
