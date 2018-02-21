@@ -404,7 +404,7 @@ export default class Dropdown extends PureComponent {
 
   resetScrollOffset() {
     let { selected } = this.state;
-    let { data, dropdownPosition } = this.props;
+    let { data } = this.props;
 
     let offset = 0;
     let itemCount = data.length;
