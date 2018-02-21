@@ -413,30 +413,20 @@ export default class Dropdown extends PureComponent {
     let visibleItemCount = this.visibleItemCount();
 
     if (itemCount > visibleItemCount) {
-      if (null == dropdownPosition) {
-        switch (selected) {
-          case -1:
-            break;
+      switch (selected) {
+        case -1:
+          break;
 
-          case 0:
-          case 1:
-            break;
+        case 0:
+        case 1:
+          break;
 
-          default:
-            if (selected >= itemCount - tailItemCount) {
-              offset = itemSize * (itemCount - visibleItemCount);
-            } else {
-              offset = itemSize * (selected - 1);
-            }
-        }
-      } else {
-        if (~selected) {
-          if (dropdownPosition < 0) {
-            offset = itemSize * (selected - visibleItemCount - dropdownPosition);
+        default:
+          if (selected >= itemCount - tailItemCount) {
+            offset = itemSize * (itemCount - visibleItemCount);
           } else {
-            offset = itemSize * (selected - dropdownPosition);
+            offset = itemSize * (selected - 1);
           }
-        }
       }
     }
 
