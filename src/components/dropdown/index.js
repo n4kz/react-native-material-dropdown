@@ -28,6 +28,7 @@ export default class Dropdown extends PureComponent {
 
     valueExtractor: ({ value } = {}, index) => value,
     labelExtractor: ({ label } = {}, index) => label,
+    propsExtractor: () => null,
 
     absoluteRTLLayout: false,
 
@@ -92,6 +93,7 @@ export default class Dropdown extends PureComponent {
 
     valueExtractor: PropTypes.func,
     labelExtractor: PropTypes.func,
+    propsExtractor: PropTypes.func,
 
     absoluteRTLLayout: PropTypes.bool,
 
@@ -542,6 +544,7 @@ export default class Dropdown extends PureComponent {
     let {
       valueExtractor,
       labelExtractor,
+      propsExtractor,
       textColor,
       itemColor,
       selectedItemColor = textColor,
@@ -554,17 +557,22 @@ export default class Dropdown extends PureComponent {
     } = this.props;
 
     let props = {
-      baseColor,
-      fontSize,
       rippleDuration,
       rippleOpacity,
+      rippleColor: baseColor,
+
+      shadeColor: baseColor,
       shadeOpacity,
-      onPress: this.onSelect,
+
+      ...propsExtractor(item, index),
+
       style: {
         height: this.itemSize(),
         paddingLeft: leftInset,
         paddingRight: rightInset,
       },
+
+      onPress: this.onSelect,
     };
 
     if (null == item) {
