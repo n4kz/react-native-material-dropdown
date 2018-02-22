@@ -44,11 +44,14 @@ import { Dropdown } from 'react-native-material-dropdown';
 class Example extends Component {
   render() {
     let data = [{
-      value: 'Banana',
+      label: 'Banana 🍌'
+      value: 'Banana'
     }, {
       value: 'Mango',
+      disabled: true
     }, {
-      value: 'Pear',
+      label: 'Pear 🍐'
+      value: 'Pear'
     }];
 
     return (
@@ -63,37 +66,40 @@ class Example extends Component {
 
 ## Properties
 
- name              | description                                   | type     | default
-:----------------- |:--------------------------------------------- | --------:|:------------------
- label             | Text field label text (required)              |   String | -
- error             | Text field error text                         |   String | -
- animationDuration | Text field animation duration in ms           |   Number | 225
- fontSize          | Text field font size                          |   Number | 16
- labelFontSize     | Text field label font size                    |   Number | 12
- baseColor         | Text field base color                         |   String | rgba(0, 0, 0, .38)
- textColor         | Text field text color                         |   String | rgba(0, 0, 0, .87)
- itemColor         | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
- selectedItemColor | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
- dropdownPosition  | Dropdown position (dynamic if undefined)      |   Number | -
- itemCount         | Dropdown visible item count                   |   Number | 4
- itemPadding       | Dropdown item vertical padding                |   Number | 8
- itemTextStyle     | Dropdown item text styles                     |   Object | -
- dropdownOffset    | Dropdown offset                               |   Object | { top: 32, left: 0 }
- dropdownMargins   | Dropdown margins                              |   Object | { min: 8, max: 16 }
- data              | Dropdown item data                            |    Array | []
- value             | Selected value                                |   String | -
- containerStyle    | Styles for container view                     |   Object | -
- pickerStyle       | Styles for item picker view                   |   Object | -
- shadeOpacity      | Shade opacity for dropdown items              |   Number | 0.12
- rippleOpacity     | Opacity for ripple effect                     |   Number | 0.54
- rippleInsets      | Insets for ripple on base component           |   Object | { top: 16, bottom: -8 }
- rippleCentered    | Ripple on base component should be centered   |  Boolean | false
- renderBase        | Render base component                         | Function | -
- renderAccessory   | Render text field accessory                   | Function | -
- valueExtractor    | Extract value from item (args: item, index)   | Function | ({ value }) => value
- labelExtractor    | Extract label from item (args: item, index)   | Function | ({ label }) => label
- propsExtractor    | Extract props from item (args: item, index)   | Function | () => null
- onChangeText      | Selection callback (args: value, index, data) | Function | -
+ name                        | description                                   | type     | default
+:--------------------------- |:--------------------------------------------- | --------:|:------------------
+ label                       | Text field label text (required)              |   String | -
+ error                       | Text field error text                         |   String | -
+ animationDuration           | Text field animation duration in ms           |   Number | 225
+ fontSize                    | Text field font size                          |   Number | 16
+ labelFontSize               | Text field label font size                    |   Number | 12
+ baseColor                   | Text field base color                         |   String | rgba(0, 0, 0, .38)
+ textColor                   | Text field text color                         |   String | rgba(0, 0, 0, .87)
+ itemColor                   | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
+ selectedItemColor           | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
+ disabledItemColor           | Dropdown item text color (disabled item)      |   String | rgba(0, 0, 0, .10)
+ selectedItemBackgroundColor | Dropdown item background color (active item)  |   String | -
+ disabledItemBackgroundColor | Dropdown item background color (disabled item)|   String | -
+ dropdownPosition            | Dropdown position (dynamic if undefined)      |   Number | -
+ itemCount                   | Dropdown visible item count                   |   Number | 4
+ itemPadding                 | Dropdown item vertical padding                |   Number | 8
+ itemTextStyle               | Dropdown item text styles                     |   Object | -
+ dropdownOffset              | Dropdown offset                               |   Object | { top: 32, left: 0 }
+ dropdownMargins             | Dropdown margins                              |   Object | { min: 8, max: 16 }
+ data                        | Dropdown item data                            |    Array | []
+ value                       | Selected value                                |   String | -
+ containerStyle              | Styles for container view                     |   Object | -
+ pickerStyle                 | Styles for item picker view                   |   Object | -
+ shadeOpacity                | Shade opacity for dropdown items              |   Number | 0.12
+ rippleOpacity               | Opacity for ripple effect                     |   Number | 0.54
+ rippleInsets                | Insets for ripple on base component           |   Object | { top: 16, bottom: -8 }
+ rippleCentered              | Ripple on base component should be centered   |  Boolean | false
+ renderBase                  | Render base component                         | Function | -
+ renderAccessory             | Render text field accessory                   | Function | -
+ valueExtractor              | Extract value from item (args: item, index)   | Function | ({ value }) => value
+ labelExtractor              | Extract label from item (args: item, index)   | Function | ({ label }) => label
+ propsExtractor              | Extract props from item (args: item, index)   | Function | () => null
+ onChangeText                | Selection callback (args: value, index, data) | Function | -
 
 Other [TextField][textfield], [TextInput][textinput] and [TouchableWithoutFeedback][touchable] properties will also work
 

@@ -66,6 +66,8 @@ export default class Dropdown extends PureComponent {
     textColor: 'rgba(0, 0, 0, .87)',
     itemColor: 'rgba(0, 0, 0, .54)',
     baseColor: 'rgba(0, 0, 0, .38)',
+    disabledItemColor: 'rgba(0, 0, 0, .10)',
+    disabledItemBackgroundColor: 'transparent', // Remove react-native-material-buttons's default color
 
     itemCount: 4,
     itemPadding: 8,
@@ -129,8 +131,11 @@ export default class Dropdown extends PureComponent {
 
     textColor: PropTypes.string,
     itemColor: PropTypes.string,
-    selectedItemColor: PropTypes.string,
     baseColor: PropTypes.string,
+    selectedItemColor: PropTypes.string,
+    disabledItemColor: PropTypes.string,
+    selectedItemBackgroundColor: PropTypes.string,
+    disabledItemBackgroundColor: PropTypes.string,
 
     itemTextStyle: Text.propTypes.style,
 
@@ -547,8 +552,11 @@ export default class Dropdown extends PureComponent {
       propsExtractor,
       textColor,
       itemColor,
-      selectedItemColor = textColor,
       baseColor,
+      selectedItemColor = textColor,
+      disabledItemColor,
+      selectedItemBackgroundColor,
+      disabledItemBackgroundColor,
       fontSize,
       itemTextStyle,
       rippleOpacity,
@@ -556,11 +564,16 @@ export default class Dropdown extends PureComponent {
       shadeOpacity,
     } = this.props;
 
+    let isSelected = ~selected && index === selected;
+    let isDisabled = item.disabled || false;
+
     let props = {
       rippleDuration,
       rippleOpacity,
       rippleColor: baseColor,
 
+      color: isSelected ? selectedItemBackgroundColor : null,
+      disabledColor: disabledItemBackgroundColor,
       shadeColor: baseColor,
       shadeOpacity,
 
@@ -573,25 +586,15 @@ export default class Dropdown extends PureComponent {
       },
 
       onPress: this.onSelect,
+      disabled: isDisabled
     };
 
-    if (null == item) {
-      return null;
-    }
+    if (null == item) return null;
 
     let value = valueExtractor(item, index);
     let label = labelExtractor(item, index);
-
-    let title = null == label?
-      value:
-      label;
-
-    let color = ~selected?
-      index === selected?
-        selectedItemColor:
-        itemColor:
-      selectedItemColor;
-
+    let title = null == label ? value : label;
+    let color = isDisabled ? disabledItemColor : isSelected ? selectedItemColor : itemColor;
     let style = { color, fontSize };
 
     return (
