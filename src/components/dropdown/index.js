@@ -572,8 +572,7 @@ export default class Dropdown extends PureComponent {
       rippleOpacity,
       rippleColor: baseColor,
 
-      color: isSelected ? selectedItemBackgroundColor : null,
-      disabledColor: disabledItemBackgroundColor,
+      color: isDisabled ? disabledItemBackgroundColor : isSelected ? selectedItemBackgroundColor : null,
       shadeColor: baseColor,
       shadeOpacity,
 
@@ -585,8 +584,7 @@ export default class Dropdown extends PureComponent {
         paddingRight: rightInset,
       },
 
-      onPress: this.onSelect,
-      disabled: isDisabled
+      onPress: !isDisabled ? this.onSelect : null
     };
 
     if (null == item) return null;
