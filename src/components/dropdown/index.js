@@ -293,6 +293,7 @@ export default class Dropdown extends PureComponent {
             .timing(opacity, {
               duration: animationDuration,
               toValue: 1,
+              useNativeDriver: true,
             })
             .start(() => {
               if (this.mounted && 'ios' === Platform.OS) {
@@ -316,6 +317,7 @@ export default class Dropdown extends PureComponent {
       .timing(opacity, {
         duration: animationDuration,
         toValue: 0,
+        useNativeDriver: true,
       })
       .start(() => {
         this.focused = false;
