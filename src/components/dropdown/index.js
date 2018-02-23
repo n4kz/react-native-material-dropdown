@@ -335,9 +335,8 @@ export default class Dropdown extends PureComponent {
     let { data, valueExtractor, onChangeText } = this.props;
 
     let item = data[index];
-    let itemProps = this.getItemProps(item,index);
+    let {rippleDuration} = this.getItemProps(item,index);
     let value = valueExtractor(data[index], index);
-    let itemRippleDuration = itemProps.rippleDuration;
 
     this.setState({ value });
 
@@ -345,8 +344,8 @@ export default class Dropdown extends PureComponent {
       onChangeText(value, index, data);
     }
 
-    itemRippleDuration > 0 ?
-      setTimeout(this.onClose, itemRippleDuration) :
+    rippleDuration > 0 ?
+      setTimeout(this.onClose, rippleDuration) :
       this.onClose();
   }
 
