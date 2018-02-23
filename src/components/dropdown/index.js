@@ -571,7 +571,7 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItem({ item, index }) {
-    let { selected, leftInset, rightInset } = this.state;
+    let { selected } = this.state;
 
     let {
       valueExtractor,
@@ -579,7 +579,6 @@ export default class Dropdown extends PureComponent {
       textColor,
       itemColor,
       selectedItemColor = textColor,
-      baseColor,
       fontSize,
       itemTextStyle,
     } = this.props;
