@@ -67,7 +67,6 @@ export default class Dropdown extends PureComponent {
     itemColor: 'rgba(0, 0, 0, .54)',
     baseColor: 'rgba(0, 0, 0, .38)',
     disabledItemColor: 'rgba(0, 0, 0, .10)',
-    disabledItemBackgroundColor: 'transparent', // Remove react-native-material-buttons's default color
 
     itemCount: 4,
     itemPadding: 8,
