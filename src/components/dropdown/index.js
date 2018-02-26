@@ -333,14 +333,22 @@ export default class Dropdown extends PureComponent {
   }
 
   onSelect(index) {
-    let { data, valueExtractor, onChangeText, animationDuration } = this.props;
+    let {
+      data,
+      valueExtractor,
+      onChangeText,
+      animationDuration,
+      rippleDuration,
+    } = this.props;
+
     let value = valueExtractor(data[index], index);
+    let delay = Math.max(0, rippleDuration - animationDuration);
 
     if ('function' === typeof onChangeText) {
       onChangeText(value, index, data);
     }
 
-    setTimeout(() => this.onClose(value), animationDuration);
+    setTimeout(() => this.onClose(value), delay);
   }
 
   onLayout(event) {
