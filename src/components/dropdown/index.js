@@ -168,7 +168,7 @@ export default class Dropdown extends PureComponent {
 
     this.keyExtractor = this.keyExtractor.bind(this);
 
-    this.blur = this.onClose;
+    this.blur = () => this.onClose();
     this.focus = this.onPress;
 
     let { value } = this.props;
@@ -309,7 +309,7 @@ export default class Dropdown extends PureComponent {
     });
   }
 
-  onClose() {
+  onClose(value = this.state.value) {
     let { onBlur, animationDuration } = this.props;
     let { opacity } = this.state;
 
@@ -327,7 +327,7 @@ export default class Dropdown extends PureComponent {
         }
 
         if (this.mounted) {
-          this.setState({ modal: false });
+          this.setState({ value, modal: false });
         }
       });
   }
@@ -336,13 +336,11 @@ export default class Dropdown extends PureComponent {
     let { data, valueExtractor, onChangeText, animationDuration } = this.props;
     let value = valueExtractor(data[index], index);
 
-    this.setState({ value });
-
     if ('function' === typeof onChangeText) {
       onChangeText(value, index, data);
     }
 
-    setTimeout(this.onClose, animationDuration);
+    setTimeout(() => this.onClose(value), animationDuration);
   }
 
   onLayout(event) {
@@ -709,10 +707,10 @@ export default class Dropdown extends PureComponent {
         <Modal
           visible={modal}
           transparent={true}
-          onRequestClose={this.onClose}
+          onRequestClose={this.blur}
           supportedOrientations={supportedOrientations}
         >
-          <TouchableWithoutFeedback onPress={this.onClose}>
+          <TouchableWithoutFeedback onPress={this.blur}>
             <View style={overlayStyle}>
               <Animated.View
                 style={[styles.picker, pickerStyle, pickerStyleOverrides]}
