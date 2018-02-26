@@ -439,12 +439,17 @@ export default class Dropdown extends PureComponent {
             }
         }
       } else {
+        let index = selected - dropdownPosition;
+
+        if (dropdownPosition < 0) {
+          index -= visibleItemCount;
+        }
+
+        index = Math.max(0, index);
+        index = Math.min(index, itemCount - visibleItemCount);
+
         if (~selected) {
-          if (dropdownPosition < 0) {
-            offset = itemSize * (selected - visibleItemCount - dropdownPosition);
-          } else {
-            offset = itemSize * (selected - dropdownPosition);
-          }
+          offset = itemSize * index;
         }
       }
     }
