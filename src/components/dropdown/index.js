@@ -165,6 +165,7 @@ export default class Dropdown extends PureComponent {
 
     this.renderAccessory = this.renderAccessory.bind(this);
     this.renderItem = this.renderItem.bind(this);
+    this.getItemProps = this.getItemProps.bind(this);
 
     this.keyExtractor = this.keyExtractor.bind(this);
 
@@ -333,7 +334,10 @@ export default class Dropdown extends PureComponent {
   }
 
   onSelect(index) {
-    let { data, valueExtractor, onChangeText, animationDuration } = this.props;
+    let { data, valueExtractor, onChangeText } = this.props;
+
+    let item = data[index];
+    let {rippleDuration} = this.getItemProps(item,index);
     let value = valueExtractor(data[index], index);
 
     this.setState({ value });
@@ -342,7 +346,9 @@ export default class Dropdown extends PureComponent {
       onChangeText(value, index, data);
     }
 
-    setTimeout(this.onClose, animationDuration);
+    rippleDuration > 0 ?
+      setTimeout(this.onClose, rippleDuration) :
+      this.onClose();
   }
 
   onLayout(event) {
@@ -540,42 +546,46 @@ export default class Dropdown extends PureComponent {
     );
   }
 
-  renderItem({ item, index }) {
-    let { selected, leftInset, rightInset } = this.state;
-
+  getItemProps(item,index) {
+    let { leftInset, rightInset } = this.state;
     let {
-      valueExtractor,
-      labelExtractor,
       propsExtractor,
-      textColor,
-      itemColor,
-      selectedItemColor = textColor,
       baseColor,
-      fontSize,
-      itemTextStyle,
       rippleOpacity,
       rippleDuration,
       shadeOpacity,
     } = this.props;
 
-    let props = {
+    return {
       rippleDuration,
       rippleOpacity,
       rippleColor: baseColor,
-
       shadeColor: baseColor,
       shadeOpacity,
-
       ...propsExtractor(item, index),
-
       style: {
         height: this.itemSize(),
         paddingLeft: leftInset,
         paddingRight: rightInset,
       },
-
       onPress: this.onSelect,
     };
+  }
+
+  renderItem({ item, index }) {
+    let { selected } = this.state;
+
+    let {
+      valueExtractor,
+      labelExtractor,
+      textColor,
+      itemColor,
+      selectedItemColor = textColor,
+      fontSize,
+      itemTextStyle,
+    } = this.props;
+
+    let props = this.getItemProps(item,index);
 
     if (null == item) {
       return null;
