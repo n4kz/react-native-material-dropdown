@@ -83,6 +83,7 @@ class Example extends Component {
  data              | Dropdown item data                            |    Array | []
  value             | Selected value                                |   String | -
  containerStyle    | Styles for container view                     |   Object | -
+ overlayStyle      | Styles for overlay view                       |   Object | -
  pickerStyle       | Styles for item picker view                   |   Object | -
  shadeOpacity      | Shade opacity for dropdown items              |   Number | 0.12
  rippleOpacity     | Opacity for ripple effect                     |   Number | 0.54
