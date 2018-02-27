@@ -650,17 +650,10 @@ export default class Dropdown extends PureComponent {
 
     let { left, top, width, opacity, selected, modal } = this.state;
 
-    let dimensions = Dimensions.get('window');
-
     let itemCount = data.length;
     let visibleItemCount = this.visibleItemCount();
     let tailItemCount = this.tailItemCount();
     let itemSize = this.itemSize();
-
-    let overlayStyle = {
-      width: dimensions.width,
-      height: dimensions.height,
-    };
 
     let height = 2 * itemPadding + itemSize * visibleItemCount;
     let translateY = -itemPadding;
@@ -689,12 +682,13 @@ export default class Dropdown extends PureComponent {
       }
     }
 
+    let overlayStyle = { opacity };
+
     let pickerStyle = {
       width,
       height,
       top,
       left,
-      opacity,
       transform: [{ translateY }],
     };
 
@@ -724,23 +718,23 @@ export default class Dropdown extends PureComponent {
           onRequestClose={this.blur}
           supportedOrientations={supportedOrientations}
         >
-          <TouchableWithoutFeedback onPress={this.blur}>
-            <View style={overlayStyle}>
-              <Animated.View
-                style={[styles.picker, pickerStyle, pickerStyleOverrides]}
-              >
-                <FlatList
-                  ref={this.updateScrollRef}
-                  data={data}
-                  style={styles.scroll}
-                  renderItem={this.renderItem}
-                  keyExtractor={this.keyExtractor}
-                  scrollEnabled={visibleItemCount < itemCount}
-                  contentContainerStyle={styles.scrollContainer}
-                />
-              </Animated.View>
+          <Animated.View
+            style={[styles.overlay, overlayStyle]}
+            onStartShouldSetResponder={() => true}
+            onResponderRelease={this.blur}
+          >
+            <View style={[styles.picker, pickerStyle, pickerStyleOverrides]}>
+              <FlatList
+                ref={this.updateScrollRef}
+                data={data}
+                style={styles.scroll}
+                renderItem={this.renderItem}
+                keyExtractor={this.keyExtractor}
+                scrollEnabled={visibleItemCount < itemCount}
+                contentContainerStyle={styles.scrollContainer}
+              />
             </View>
-          </TouchableWithoutFeedback>
+          </Animated.View>
         </Modal>
       </View>
     );
