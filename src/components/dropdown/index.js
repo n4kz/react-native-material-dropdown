@@ -146,6 +146,7 @@ export default class Dropdown extends PureComponent {
     renderAccessory: PropTypes.func,
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
+    overlayStyle: (ViewPropTypes || View.propTypes).style,
     pickerStyle: (ViewPropTypes || View.propTypes).style,
 
     supportedOrientations: PropTypes.arrayOf(PropTypes.string),
@@ -622,6 +623,7 @@ export default class Dropdown extends PureComponent {
       renderBase,
       renderAccessory,
       containerStyle,
+      overlayStyle: overlayStyleOverrides,
       pickerStyle: pickerStyleOverrides,
 
       rippleInsets,
@@ -719,7 +721,7 @@ export default class Dropdown extends PureComponent {
           supportedOrientations={supportedOrientations}
         >
           <Animated.View
-            style={[styles.overlay, overlayStyle]}
+            style={[styles.overlay, overlayStyle, overlayStyleOverrides]}
             onStartShouldSetResponder={() => true}
             onResponderRelease={this.blur}
           >
