@@ -72,8 +72,9 @@ class Example extends Component {
  labelFontSize     | Text field label font size                    |   Number | 12
  baseColor         | Text field base color                         |   String | rgba(0, 0, 0, .38)
  textColor         | Text field text color                         |   String | rgba(0, 0, 0, .87)
- itemColor         | Dropdown item text color (inactive items)     |   String | rgba(0, 0, 0, .54)
+ itemColor         | Dropdown item text color (inactive item)      |   String | rgba(0, 0, 0, .54)
  selectedItemColor | Dropdown item text color (active item)        |   String | rgba(0, 0, 0, .87)
+ disabledItemColor | Dropdown item text color (disabled item)      |   String | rgba(0, 0, 0, .38)
  dropdownPosition  | Dropdown position (dynamic if undefined)      |   Number | -
  itemCount         | Dropdown visible item count                   |   Number | 4
  itemPadding       | Dropdown item vertical padding                |   Number | 8
