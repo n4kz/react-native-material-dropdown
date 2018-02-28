@@ -82,6 +82,7 @@ export default function init() {
                   onChangeText={this.onChangeText}
                   label='Color code'
                   data={colorCodeData}
+                  propsExtractor={({ props }, index) => props}
                 />
               </View>
             </View>
@@ -171,7 +172,7 @@ const colorNameData = [
 ];
 
 const colorCodeData = [
-  { value: '900' },
+  { value: '900', props: { disabled: true } },
   { value: '700' },
   { value: 'A700' },
   { value: 'A400' },

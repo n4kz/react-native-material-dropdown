@@ -27,8 +27,12 @@ export default StyleSheet.create({
     backgroundColor: 'transparent', /* XXX: Required */
   },
 
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+  },
+
   picker: {
-    backgroundColor: 'rgb(255, 255, 255)',
+    backgroundColor: 'rgba(255, 255, 255, 1.0)',
     borderRadius: 2,
 
     position: 'absolute',
