@@ -129,6 +129,7 @@ export default class Dropdown extends PureComponent {
     textColor: PropTypes.string,
     itemColor: PropTypes.string,
     selectedItemColor: PropTypes.string,
+    disabledItemColor: PropTypes.string,
     baseColor: PropTypes.string,
 
     itemTextStyle: Text.propTypes.style,
@@ -560,6 +561,10 @@ export default class Dropdown extends PureComponent {
   }
 
   renderItem({ item, index }) {
+    if (null == item) {
+      return null;
+    }
+
     let { selected, leftInset, rightInset } = this.state;
 
     let {
@@ -568,8 +573,9 @@ export default class Dropdown extends PureComponent {
       propsExtractor,
       textColor,
       itemColor,
-      selectedItemColor = textColor,
       baseColor,
+      selectedItemColor = textColor,
+      disabledItemColor = baseColor,
       fontSize,
       itemTextStyle,
       rippleOpacity,
@@ -579,31 +585,20 @@ export default class Dropdown extends PureComponent {
 
     let props = propsExtractor(item, index);
 
-    props = {
-      rippleDuration,
-      rippleOpacity,
-      rippleColor: baseColor,
+    let { style, disabled }
+      = props
+      = {
+        rippleDuration,
+        rippleOpacity,
+        rippleColor: baseColor,
 
-      shadeColor: baseColor,
-      shadeOpacity,
+        shadeColor: baseColor,
+        shadeOpacity,
 
-      ...props,
+        ...props,
 
-      style: [
-        (props || {}).style,
-        {
-          height: this.itemSize(),
-          paddingLeft: leftInset,
-          paddingRight: rightInset,
-        },
-      ],
-
-      onPress: this.onSelect,
-    };
-
-    if (null == item) {
-      return null;
-    }
+        onPress: this.onSelect,
+      };
 
     let value = valueExtractor(item, index);
     let label = labelExtractor(item, index);
@@ -612,17 +607,28 @@ export default class Dropdown extends PureComponent {
       value:
       label;
 
-    let color = ~selected?
-      index === selected?
-        selectedItemColor:
-        itemColor:
-      selectedItemColor;
+    let color = disabled?
+      disabledItemColor:
+      ~selected?
+        index === selected?
+          selectedItemColor:
+          itemColor:
+        selectedItemColor;
 
-    let style = { color, fontSize };
+    let textStyle = { color, fontSize };
+
+    props.style = [
+      style,
+      {
+        height: this.itemSize(),
+        paddingLeft: leftInset,
+        paddingRight: rightInset,
+      },
+    ];
 
     return (
       <DropdownItem index={index} {...props}>
-        <Text style={[styles.item, itemTextStyle, style]} numberOfLines={1}>
+        <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
           {title}
         </Text>
       </DropdownItem>
