@@ -590,7 +590,7 @@ export default class Dropdown extends PureComponent {
       ...props,
 
       style: [
-        props.style,
+        (props || {}).style,
         {
           height: this.itemSize(),
           paddingLeft: leftInset,
