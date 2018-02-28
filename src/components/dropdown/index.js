@@ -736,7 +736,10 @@ export default class Dropdown extends PureComponent {
             onStartShouldSetResponder={() => true}
             onResponderRelease={this.blur}
           >
-            <View style={[styles.picker, pickerStyle, pickerStyleOverrides]}>
+            <View
+              style={[styles.picker, pickerStyle, pickerStyleOverrides]}
+              onStartShouldSetResponder={() => true}
+            >
               <FlatList
                 ref={this.updateScrollRef}
                 data={data}
