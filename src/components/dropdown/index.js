@@ -108,6 +108,7 @@ export default class Dropdown extends PureComponent {
 
     dropdownPosition: PropTypes.number,
 
+    rippleColor: PropTypes.string,
     rippleCentered: PropTypes.bool,
     rippleSequential: PropTypes.bool,
 
@@ -520,6 +521,7 @@ export default class Dropdown extends PureComponent {
   renderRipple() {
     let {
       baseColor,
+      rippleColor = baseColor,
       rippleOpacity,
       rippleDuration,
       rippleCentered,
@@ -537,7 +539,7 @@ export default class Dropdown extends PureComponent {
     return (
       <Ripple
         style={style}
-        rippleColor={baseColor}
+        rippleColor={rippleColor}
         rippleDuration={rippleDuration}
         rippleOpacity={rippleOpacity}
         rippleCentered={rippleCentered}
