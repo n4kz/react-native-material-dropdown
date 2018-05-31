@@ -21,7 +21,7 @@ import styles from './styles';
 export default class Dropdown extends PureComponent {
   static defaultProps = {
 
-    TextComponent: TextField
+    TextComponent: TextField,
 
     hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
 
