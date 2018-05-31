@@ -20,6 +20,9 @@ import styles from './styles';
 
 export default class Dropdown extends PureComponent {
   static defaultProps = {
+
+    TextComponent: TextField
+
     hitSlop: { top: 6, right: 4, bottom: 6, left: 4 },
 
     disabled: false,
@@ -482,6 +485,7 @@ export default class Dropdown extends PureComponent {
       labelExtractor,
       dropdownOffset,
       renderAccessory = this.renderAccessory,
+      TextComponent,
     } = this.props;
 
     let index = this.selectedIndex();
@@ -504,7 +508,7 @@ export default class Dropdown extends PureComponent {
       String(title);
 
     return (
-      <TextField
+      <TextComponent
         label=''
         labelHeight={dropdownOffset.top - Platform.select({ ios: 1, android: 2 })}
 
