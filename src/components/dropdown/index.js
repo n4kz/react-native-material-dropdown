@@ -503,7 +503,8 @@ export default class Dropdown extends PureComponent {
     title = null == title || 'string' === typeof title?
       title:
       String(title);
-
+      delete props.disabled;
+      const inputContainerStyle = this.props.disabled ? { borderBottomWidth: 0 } : {};
     return (
       <TextField
         label=''
@@ -514,7 +515,8 @@ export default class Dropdown extends PureComponent {
         value={title}
         editable={false}
         onChangeText={undefined}
-        renderAccessory={renderAccessory}
+        renderAccessory={this.props.disabled ? undefined : renderAccessory}
+        inputContainerStyle={inputContainerStyle}
       />
     );
   }
