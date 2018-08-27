@@ -101,14 +101,15 @@ Other [TextField][textfield], [TextInput][textinput] and [TouchableWithoutFeedba
 
 ## Methods
 
- name            | description                    | returns
-:--------------- |:------------------------------ |:--------
- focus()         | Acquire focus (open dropdown)  | -
- blur()          | Release focus (close dropdown) | -
- value()         | Get current value              | String
- selectedIndex() | Get selected index             | Number
- selectedItem()  | Get selected item              | Object
- isFocused()     | Get current focus state        | Boolean
+ name             | description                    | returns
+:---------------  |:------------------------------ |:--------
+ focus()          | Acquire focus (open dropdown)  | -
+ blur()           | Release focus (close dropdown) | -
+ value()          | Get current value              | String
+ selectedIndex()  | Get selected index             | Number
+ selectedItem()   | Get selected item              | Object
+ isFocused()      | Get current focus state        | Boolean
+ setValue(string) | Change selected value          | -
 
 ## Example
 

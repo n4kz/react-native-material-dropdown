@@ -637,6 +637,10 @@ export default class Dropdown extends PureComponent {
     );
   }
 
+  setValue(value)  {
+    this.setState({ value });
+  }
+
   render() {
     let {
       renderBase,
