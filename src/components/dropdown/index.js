@@ -28,6 +28,7 @@ export default class Dropdown extends PureComponent {
 
     valueExtractor: ({ value } = {}, index) => value,
     labelExtractor: ({ label } = {}, index) => label,
+    displayTextExtractor: ({ label, displayText } = {}, index) => displayText || label,
     propsExtractor: () => null,
 
     absoluteRTLLayout: false,
@@ -354,7 +355,8 @@ export default class Dropdown extends PureComponent {
       onChangeText(value, index, data);
     }
 
-    setTimeout(() => this.onClose(value), delay);
+    const isItemDisabled = data[index].disabled
+    setTimeout(() => this.onClose(!isItemDisabled ? value : undefined), delay);
   }
 
   onLayout(event) {
@@ -571,7 +573,7 @@ export default class Dropdown extends PureComponent {
 
     let {
       valueExtractor,
-      labelExtractor,
+      displayTextExtractor,
       propsExtractor,
       textColor,
       itemColor,
@@ -603,13 +605,14 @@ export default class Dropdown extends PureComponent {
       };
 
     let value = valueExtractor(item, index);
-    let label = labelExtractor(item, index);
+    let displayText = displayTextExtractor(item, index);
+    const isItemDisabled = item.disabled
 
-    let title = null == label?
+    let title = null == displayText?
       value:
-      label;
+      displayText;
 
-    let color = disabled?
+    let color = isItemDisabled?
       disabledItemColor:
       ~selected?
         index === selected?
