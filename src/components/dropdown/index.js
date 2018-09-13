@@ -355,7 +355,8 @@ export default class Dropdown extends PureComponent {
       onChangeText(value, index, data);
     }
 
-    setTimeout(() => this.onClose(value), delay);
+    const isItemDisabled = data[index].disabled
+    setTimeout(() => this.onClose(!isItemDisabled ? value : undefined), delay);
   }
 
   onLayout(event) {
