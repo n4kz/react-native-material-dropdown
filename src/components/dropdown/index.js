@@ -76,6 +76,8 @@ export default class Dropdown extends PureComponent {
     ],
 
     useNativeDriver: false,
+
+    preprocessFunc: () => null
   };
 
   static propTypes = {
@@ -153,6 +155,8 @@ export default class Dropdown extends PureComponent {
     supportedOrientations: PropTypes.arrayOf(PropTypes.string),
 
     useNativeDriver: PropTypes.bool,
+    
+    preprocessFunc: PropTypes.func
   };
 
   constructor(props) {
@@ -214,7 +218,16 @@ export default class Dropdown extends PureComponent {
       animationDuration,
       absoluteRTLLayout,
       useNativeDriver,
+      preprocessFunc
     } = this.props;
+
+    if (
+      preprocessFunc && 
+      typeof preprocessFunc === "function" &&
+      !disabled
+    ) {
+      preprocessFunc();
+    }
 
     if (disabled) {
       return;
