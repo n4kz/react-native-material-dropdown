@@ -68,6 +68,7 @@ class Example extends Component {
  label             | Text field label text                         |   String | -
  error             | Text field error text                         |   String | -
  animationDuration | Text field animation duration in ms           |   Number | 225
+ rippleDuration    | Ripple animation duration in ms               |   Number | 400
  fontSize          | Text field font size                          |   Number | 16
  labelFontSize     | Text field label font size                    |   Number | 12
  baseColor         | Text field base color                         |   String | rgba(0, 0, 0, .38)
