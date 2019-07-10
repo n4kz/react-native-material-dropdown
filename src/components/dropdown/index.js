@@ -13,7 +13,7 @@ import {
     I18nManager,
 } from 'react-native';
 import Ripple from 'react-native-material-ripple';
-import { TextField } from 'react-native-material-textfield';
+import { TextInput } from 'react-native-paper';
 
 import DropdownItem from '../item';
 import styles from './styles';
@@ -505,12 +505,10 @@ export default class Dropdown extends PureComponent {
             String(title);
 
         return (
-            <TextField
+            <TextInput
+                style={{backgroundColor: "transparent", marginBottom: 16}}
                 label=''
-                labelHeight={dropdownOffset.top - Platform.select({ ios: 1, android: 2 })}
-                style={styles.labelContainerStyle}
                 {...props}
-
                 value={title}
                 editable={false}
                 onChangeText={undefined}
