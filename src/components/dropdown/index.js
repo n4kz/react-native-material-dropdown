@@ -146,6 +146,7 @@ export default class Dropdown extends PureComponent {
     renderBase: PropTypes.func,
     renderAccessory: PropTypes.func,
 
+    accessoryContainerStyle: (ViewPropTypes || View.propTypes).style,
     containerStyle: (ViewPropTypes || View.propTypes).style,
     overlayStyle: (ViewPropTypes || View.propTypes).style,
     pickerStyle: (ViewPropTypes || View.propTypes).style,
@@ -550,11 +551,11 @@ export default class Dropdown extends PureComponent {
   }
 
   renderAccessory() {
-    let { baseColor: backgroundColor } = this.props;
+    let { baseColor: backgroundColor, accessoryContainerStyle } = this.props;
     let triangleStyle = { backgroundColor };
 
     return (
-      <View style={styles.accessory}>
+      <View style={[styles.accessory, accessoryContainerStyle || {}]}>
         <View style={styles.triangleContainer}>
           <View style={[styles.triangle, triangleStyle]} />
         </View>
