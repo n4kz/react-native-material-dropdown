@@ -35,6 +35,10 @@ export default function init() {
     updateRef(name, ref) {
       this[name] = ref;
     }
+    
+    getDownArrow(){
+      return <Text>👇🏾</Text>;
+    }
 
     render() {
       let { typography, name, code, sample } = this.state;
@@ -62,7 +66,8 @@ export default function init() {
               onChangeText={this.onChangeText}
               label='Typography'
               data={typographyData}
-            />
+            />                            
+
 
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1 }}>
@@ -72,6 +77,7 @@ export default function init() {
                   onChangeText={this.onChangeText}
                   label='Color name'
                   data={colorNameData}
+                  renderAccessory={this.getDownArrow}
                 />
               </View>
 
