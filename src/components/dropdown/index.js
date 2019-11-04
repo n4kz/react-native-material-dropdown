@@ -194,6 +194,18 @@ export default class Dropdown extends PureComponent {
     }
   }
 
+  //last version
+  static getDerivedStateFromProps(props, state) {
+    if (props.selected !== state.selected) {
+      return {
+        selected: props.selected,
+      };
+    }
+
+    // Return null if the state hasn't changed
+    return null;
+  }
+
   componentDidMount() {
     this.mounted = true;
   }
