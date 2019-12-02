@@ -63,6 +63,7 @@ export default class Dropdown extends PureComponent {
     textColor: 'rgba(0, 0, 0, .87)',
     itemColor: 'rgba(0, 0, 0, .54)',
     baseColor: 'rgba(0, 0, 0, .38)',
+    numberOfLines: 1,
 
     itemCount: 4,
     itemPadding: 8,
@@ -132,6 +133,7 @@ export default class Dropdown extends PureComponent {
     selectedItemColor: PropTypes.string,
     disabledItemColor: PropTypes.string,
     baseColor: PropTypes.string,
+    numberOfLines: PropTypes.number,
 
     itemTextStyle: Text.propTypes.style,
 
@@ -390,9 +392,9 @@ export default class Dropdown extends PureComponent {
   }
 
   itemSize() {
-    let { fontSize, itemPadding } = this.props;
+    let { fontSize, itemPadding, numberOfLines } = this.props;
 
-    return Math.ceil(fontSize * 1.5 + itemPadding * 2);
+    return Math.ceil(fontSize * 1.5 * numberOfLines + itemPadding * 2);
   }
 
   visibleItemCount() {
@@ -502,7 +504,7 @@ export default class Dropdown extends PureComponent {
     title = null == title || 'string' === typeof title?
       title:
       String(title);
-
+      delete props.disabled;
     return (
       <TextField
         label=''
@@ -513,7 +515,8 @@ export default class Dropdown extends PureComponent {
         value={title}
         editable={false}
         onChangeText={undefined}
-        renderAccessory={renderAccessory}
+        renderAccessory={this.props.disabled ? undefined : renderAccessory}
+        inputContainerStyle={{ borderBottomWidth: 0 }}
       />
     );
   }
@@ -630,7 +633,7 @@ export default class Dropdown extends PureComponent {
 
     return (
       <DropdownItem index={index} {...props}>
-        <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
+        <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={props.numberOfLines}>
           {title}
         </Text>
       </DropdownItem>
