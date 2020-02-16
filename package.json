@@ -1,10 +1,11 @@
 {
-  "name": "react-native-material-dropdown-v2",
-  "version": "0.11.1",
+  "name": "react-native-material-dropdown-v3",
+  "version": "0.11.2",
   "license": "BSD-3-Clause",
   "contributors": [
     {"name": "Alexander Nazarov", "email": "n4kz@n4kz.com"},
-    {"name": "Jimmy Wei", "email": "ijimmywei@gmail.com"}
+    {"name": "Jimmy Wei", "email": "ijimmywei@gmail.com"},
+    {"name": "Mike Dizon", "email": "mdizon@gmail.com"}
   ],
 
   "description": "Material dropdown",
@@ -24,7 +25,7 @@
 
   "repository": {
     "type": "git",
-    "url": "git://github.com/iJimmyWei/react-native-material-dropdown.git"
+    "url": "git://github.com/mikedizon/react-native-material-dropdown.git"
   },
 
   "peerDependencies": {
@@ -45,7 +46,6 @@
 
   "dependencies": {
     "prop-types": "^15.5.9",
-    "react-native-material-buttons": "^0.5.0",
     "react-native-material-ripple": "^0.8.0"
   }
 }
