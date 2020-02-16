@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Button } from 'react-native-material-buttons';
+import { Button } from 'react-native-paper';
 
 import styles from './styles';
 
