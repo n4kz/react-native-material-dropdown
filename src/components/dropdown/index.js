@@ -189,11 +189,15 @@ export default class Dropdown extends PureComponent {
         };
     }
 
-    componentWillReceiveProps({ value }) {
-        if (value !== this.props.value) {
-            this.setState({ value });
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.value !== this.props.value) {
+            this.txRef.current.setValue(this.props.value)
+        } else if (prevState.value !== this.state.value) {
+            this.txRef.current.setValue(this.state.value)
         }
     }
+
+    
 
     componentDidMount() {
         this.mounted = true;
@@ -475,6 +479,8 @@ export default class Dropdown extends PureComponent {
         return `${index}-${valueExtractor(item, index)}`;
     }
 
+    txRef = React.createRef();
+
     renderBase(props) {
         let { value } = this.state;
         let {
@@ -506,6 +512,7 @@ export default class Dropdown extends PureComponent {
 
         return (
             <TextInput
+                ref={this.txRef}
                 style={{backgroundColor: "transparent", marginBottom: 16}}
                 label=''
                 {...props}
