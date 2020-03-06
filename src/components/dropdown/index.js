@@ -76,6 +76,8 @@ export default class Dropdown extends PureComponent {
     ],
 
     useNativeDriver: false,
+
+    lineWidth: 0.5,
   };
 
   static propTypes = {
@@ -153,6 +155,8 @@ export default class Dropdown extends PureComponent {
     supportedOrientations: PropTypes.arrayOf(PropTypes.string),
 
     useNativeDriver: PropTypes.bool,
+
+    lineWidth: PropTypes.number
   };
 
   constructor(props) {
@@ -510,6 +514,7 @@ export default class Dropdown extends PureComponent {
 
         {...props}
 
+        lineWidth={this.props.lineWidth}
         value={title}
         editable={false}
         onChangeText={undefined}
