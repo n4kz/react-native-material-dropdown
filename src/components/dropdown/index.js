@@ -629,7 +629,7 @@ export default class Dropdown extends PureComponent {
     ];
 
     return (
-      <DropdownItem index={index} {...props}>
+      <DropdownItem index={index} {...props} testID={title}>
         <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
           {title}
         </Text>
