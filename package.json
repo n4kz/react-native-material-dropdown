@@ -1,6 +1,6 @@
 {
-  "name": "react-native-material-dropdown",
-  "version": "0.11.1",
+  "name": "@softmedialab/react-native-material-dropdown",
+  "version": "0.0.1",
   "license": "BSD-3-Clause",
   "author": "Alexander Nazarov <n4kz@n4kz.com>",
 
@@ -21,7 +21,7 @@
 
   "repository": {
     "type": "git",
-    "url": "git://github.com/n4kz/react-native-material-dropdown.git"
+    "url": "git://github.com/SoftMediaLab/react-native-material-dropdown.git"
   },
 
   "peerDependencies": {
