@@ -481,6 +481,8 @@ export default class Dropdown extends PureComponent {
       renderBase,
       labelExtractor,
       dropdownOffset,
+      renderRightAccessory,
+      renderLeftAccessory,
       renderAccessory = this.renderAccessory,
     } = this.props;
 
@@ -514,6 +516,8 @@ export default class Dropdown extends PureComponent {
         editable={false}
         onChangeText={undefined}
         renderAccessory={renderAccessory}
+        renderRightAccessory={renderRightAccessory}
+        renderLeftAccessory={renderLeftAccessory}
       />
     );
   }
