@@ -385,6 +385,10 @@ export default class Dropdown extends PureComponent {
     return data[this.selectedIndex()];
   }
 
+  setValue(text) {
+    this.setState({ value: text });
+  }
+
   isFocused() {
     return this.focused;
   }
