@@ -1,13 +1,21 @@
 {
-  "name": "react-native-material-dropdown-v2.1",
+  "name": "react-native-material-dropdown-customizable-dropdown-item",
   "version": "0.11.1",
   "license": "BSD-3-Clause",
   "contributors": [
-    {"name": "Alexander Nazarov", "email": "n4kz@n4kz.com"},
-    {"name": "Jimmy Wei", "email": "ijimmywei@gmail.com"},
-    {"name": "Ruyman Rodriguez Martin", "email": "alu0100845235@ull.edu.es"}
+    {
+      "name": "Alexander Nazarov",
+      "email": "n4kz@n4kz.com"
+    },
+    {
+      "name": "Jimmy Wei",
+      "email": "ijimmywei@gmail.com"
+    },
+    {
+      "name": "Ruyman Rodriguez Martin",
+      "email": "alu0100845235@ull.edu.es"
+    }
   ],
-
   "description": "Material dropdown",
   "keywords": [
     "react",
@@ -20,35 +28,27 @@
     "spinner",
     "select"
   ],
-
   "main": "index.js",
-
   "repository": {
     "type": "git",
     "url": "git://github.com/alu0100845235/react-native-material-dropdown.git"
   },
-
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
     "react-native-paper": "*"
   },
-
   "devDependencies": {
     "babel-eslint": "^8.0.0",
     "eslint": "^4.5.0",
     "eslint-plugin-react": "^7.0.0"
   },
-
   "scripts": {
     "lint": "eslint src example/app.js"
   },
-
   "dependencies": {
     "prop-types": "^15.5.9",
     "react-native-material-buttons": "^0.6.0",
     "react-native-material-ripple": "^0.9.1"
-  },
-
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  }
 }
