@@ -60,10 +60,18 @@ class Example extends Component {
         data={data}
         renderPickerItem={(item) => (
           <View>
-            <Text style={{textAlign: 'left', fontSize: 16}} numberOfLines={1}>{item.value}</Text>
-            <Caption style={{textAlign: 'left'}} numberOfLines={1}>{item.origin}</Caption>
+            <Text
+            style={{
+              textAlign: 'left',
+              fontSize: 16
+            }} numberOfLines={1}
+            >
+              {item.value}
+            </Text>
+            <Caption numberOfLines={1}>{item.origin}</Caption>
           </View>
         )}
+        itemPadding={12}  // increase padding, for the new rendering of the picker item
       />
     );
   }
