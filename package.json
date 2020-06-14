@@ -48,5 +48,7 @@
     "prop-types": "^15.5.9",
     "react-native-material-buttons": "^0.6.0",
     "react-native-material-ripple": "^0.9.1"
-  }
+  },
+
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
 }
