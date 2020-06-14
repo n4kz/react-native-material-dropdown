@@ -145,6 +145,7 @@ export default class Dropdown extends PureComponent {
 
         renderBase: PropTypes.func,
         renderAccessory: PropTypes.func,
+        renderPickerItem: PropTypes.func,
 
         labelContainerStyle: (ViewPropTypes || View.propTypes).style,
         containerStyle: (ViewPropTypes || View.propTypes).style,
@@ -173,6 +174,8 @@ export default class Dropdown extends PureComponent {
 
         this.keyExtractor = this.keyExtractor.bind(this);
 
+
+
         this.blur = () => this.onClose();
         this.focus = this.onPress;
 
@@ -189,10 +192,11 @@ export default class Dropdown extends PureComponent {
         };
     }
 
-    componentWillReceiveProps({ value }) {
-        if (value !== this.props.value) {
-            this.setState({ value });
-        }
+    static getDerivedStateFromProps(props, state) {
+      if(props.value !== state.value) {
+        return {value: props.value};
+      }
+      else return null;
     }
 
     componentDidMount() {
@@ -475,7 +479,7 @@ export default class Dropdown extends PureComponent {
         return `${index}-${valueExtractor(item, index)}`;
     }
 
-    renderBase(props) {
+    renderizeBase(props) {
         let { value } = this.state;
         let {
             data,
@@ -497,7 +501,7 @@ export default class Dropdown extends PureComponent {
         }
 
         if ('function' === typeof renderBase) {
-            return renderBase({ ...props, title, value, renderAccessory });
+            return renderBase({ ...props, title, value });
         }
 
         title = null == title || 'string' === typeof title ?
@@ -505,15 +509,14 @@ export default class Dropdown extends PureComponent {
             String(title);
 
         return (
-            <TextInput
-                style={{backgroundColor: "transparent", marginBottom: 16}}
-                label=''
-                {...props}
-                value={title}
-                editable={false}
-                onChangeText={undefined}
-                renderAccessory={renderAccessory}
-            />
+              <TextInput
+                  style={{backgroundColor: "transparent", marginBottom: 16}}
+                  label=''
+                  {...props}
+                  value={title}
+                  editable={false}
+                  onChangeText={undefined}
+              />
         );
     }
 
@@ -582,8 +585,8 @@ export default class Dropdown extends PureComponent {
             rippleOpacity,
             rippleDuration,
             shadeOpacity,
+            renderPickerItem,
         } = this.props;
-
         let props = propsExtractor(item, index);
 
         let { style, disabled }
@@ -629,9 +632,13 @@ export default class Dropdown extends PureComponent {
 
         return (
             <DropdownItem index={index} {...props}>
-                <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
-                    {title}
-                </Text>
+                {!renderPickerItem ?
+                  <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
+                      {title}
+                  </Text>
+                  :
+                  renderPickerItem(item)
+                }
             </DropdownItem>
         );
     }
@@ -728,7 +735,17 @@ export default class Dropdown extends PureComponent {
             <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle}>
                 <TouchableWithoutFeedback {...touchableProps}>
                     <View pointerEvents='box-only'>
-                        {this.renderBase(props)}
+                      <View style={{
+                          flexDirection: 'row',
+                          flex: 1,
+                          alignItems: "flex-end",
+                          justifyContent: "space-between",
+                      }}>
+                      <View style={{flex: 1,}}>
+                        {this.renderizeBase(props)}
+                      </View>
+                        {this.renderAccessory(props)}
+                      </View>
                         {this.renderRipple()}
                     </View>
                 </TouchableWithoutFeedback>

@@ -32,29 +32,38 @@ Material dropdown with consistent behaviour on iOS and Android
 ## Installation
 
 ```bash
-npm install --save react-native-material-dropdown
+npm install --save react-native-material-dropdown-v2.1
 ```
 
 ## Usage
 
 ```javascript
 import React, { Component } from 'react';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Dropdown } from 'react-native-material-dropdown-v2.1';
 
 class Example extends Component {
   render() {
     let data = [{
       value: 'Banana',
+      origin: 'Canary Islands',
     }, {
       value: 'Mango',
+      origin: 'India',
     }, {
       value: 'Pear',
+      origin: 'Greece',
     }];
 
     return (
       <Dropdown
         label='Favorite Fruit'
         data={data}
+        renderPickerItem={(item) => (
+          <View>
+            <Text style={{textAlign: 'left', fontSize: 16}} numberOfLines={1}>{item.value}</Text>
+            <Caption style={{textAlign: 'left'}} numberOfLines={1}>{item.origin}</Caption>
+          </View>
+        )}
       />
     );
   }
@@ -96,6 +105,7 @@ class Example extends Component {
  labelExtractor    | Extract label from item (args: item, index)   | Function | ({ label }) => label
  propsExtractor    | Extract props from item (args: item, index)   | Function | () => null
  onChangeText      | Selection callback (args: value, index, data) | Function | -
+ renderPickerItem  | Render picker item (args: item)               | Function | -                       
 
 Other [TextField][textfield], [TextInput][textinput] and [TouchableWithoutFeedback][touchable] properties will also work
 
