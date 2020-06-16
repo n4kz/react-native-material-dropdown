@@ -59,6 +59,8 @@ export default class Dropdown extends PureComponent {
     animationDuration: 225,
 
     fontSize: 16,
+    
+    numberOfLines: 1,
 
     textColor: 'rgba(0, 0, 0, .87)',
     itemColor: 'rgba(0, 0, 0, .54)',
@@ -126,6 +128,8 @@ export default class Dropdown extends PureComponent {
     animationDuration: PropTypes.number,
 
     fontSize: PropTypes.number,
+    
+    numberOfLines: PropTypes.number,
 
     textColor: PropTypes.string,
     itemColor: PropTypes.string,
@@ -579,6 +583,7 @@ export default class Dropdown extends PureComponent {
       selectedItemColor = textColor,
       disabledItemColor = baseColor,
       fontSize,
+      numberOfLines,
       itemTextStyle,
       rippleOpacity,
       rippleDuration,
@@ -630,7 +635,7 @@ export default class Dropdown extends PureComponent {
 
     return (
       <DropdownItem index={index} {...props}>
-        <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
+        <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={numberOfLines}>
           {title}
         </Text>
       </DropdownItem>
