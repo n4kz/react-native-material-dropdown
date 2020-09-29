@@ -43,6 +43,6 @@
     "prop-types": "^15.5.9",
     "react-native-material-buttons": "^0.5.0",
     "react-native-material-ripple": "^0.8.0",
-    "react-native-material-textfield": "git+https://github.com/javarahulsharma/react-native-material-textfield.git"
+    "react-native-material-textfield": "git+https://github.com/mahipalsingh7/react-native-material-textfield.git#7160b9301e7b8a059ee705c9781b2c71483ce5c2"
   }
 }
