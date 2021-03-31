@@ -764,7 +764,7 @@ export default class Dropdown extends PureComponent {
             onResponderRelease={this.blur}
           >
             <View
-              style={[styles.picker, pickerStyle, pickerStyleOverrides]}
+              style={[styles.picker, pickerStyle, pickerStyleOverrides, {height: 200}]}
               onStartShouldSetResponder={() => true}
             >
               <TextInput
@@ -772,6 +772,7 @@ export default class Dropdown extends PureComponent {
                 placeholder={'Search here'}
                 onChangeText={text => this.searchFilterFunction(text)}
               />
+
               <FlatList
                 ref={this.updateScrollRef}
                 data={this.state.data}

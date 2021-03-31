@@ -34,7 +34,6 @@ export default StyleSheet.create({
   picker: {
     backgroundColor: 'rgba(255, 255, 255, 1.0)',
     borderRadius: 2,
-
     position: 'absolute',
 
     ...Platform.select({
@@ -56,7 +55,7 @@ export default StyleSheet.create({
   },
 
   scroll: {
-    flex: 1,
+    flex: 0.8,
     borderRadius: 2,
   },
 
@@ -65,6 +64,7 @@ export default StyleSheet.create({
   },
 
   input: {
+    flex: 0.2,
     height: 40,
     margin: 12,
     borderBottomWidth: 0.5,
