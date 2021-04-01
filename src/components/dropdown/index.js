@@ -186,7 +186,8 @@ export default class Dropdown extends PureComponent {
       selected: -1,
       modal: false,
       value,
-      data: this.props.data
+      data: this.props.data,
+      searchText: undefined,
     };
   }
 
@@ -569,16 +570,15 @@ export default class Dropdown extends PureComponent {
     );
   }
 
-  searchFilterFunction(text) {
+  searchFilterFunction(searchText) {
     let arrayholder = this.props.data
     const newData = arrayholder.filter(item => {
     const itemData = `${item.value.toUpperCase()}`;
-    const textData = text.toUpperCase();
-
+    const textData = searchText.toUpperCase();
        return itemData.indexOf(textData) > -1;
     });
-
-    this.setState({ data: newData });
+    newData.push({value: searchText});
+    this.setState({ data: newData, searchText });
   };
 
   renderItem({ item, index }) {
@@ -771,6 +771,10 @@ export default class Dropdown extends PureComponent {
                 style={styles.input}
                 placeholder={'Search here'}
                 placeholderTextColor="#808080"
+                clearButtonMode="always"
+                onSubmitEditing={() => {
+                  this.setState({value: this.state.searchText, modal: false})
+                }}
                 onChangeText={text => this.searchFilterFunction(text)}
               />
 
