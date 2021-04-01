@@ -770,6 +770,7 @@ export default class Dropdown extends PureComponent {
               <TextInput
                 style={styles.input}
                 placeholder={'Search here'}
+                placeholderTextColor="#808080"
                 onChangeText={text => this.searchFilterFunction(text)}
               />
 
