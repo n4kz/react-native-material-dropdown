@@ -571,6 +571,7 @@ export default class Dropdown extends PureComponent {
   }
 
   searchFilterFunction(searchText) {
+
     let arrayholder = this.props.data
     const newData = arrayholder.filter(item => {
     const itemData = `${item.value.toUpperCase()}`;
@@ -578,7 +579,7 @@ export default class Dropdown extends PureComponent {
        return itemData.indexOf(textData) > -1;
     });
     newData.push({value: searchText});
-    this.setState({ data: newData, searchText });
+    this.setState({ data: [...newData, {value: 'Unknown'}], searchText });
   };
 
   renderItem({ item, index }) {
