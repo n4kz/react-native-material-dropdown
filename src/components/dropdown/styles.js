@@ -34,7 +34,6 @@ export default StyleSheet.create({
   picker: {
     backgroundColor: 'rgba(255, 255, 255, 1.0)',
     borderRadius: 2,
-    position: 'absolute',
 
     ...Platform.select({
       ios: {
@@ -68,6 +67,7 @@ export default StyleSheet.create({
     height: 40,
     margin: 12,
     borderBottomWidth: 0.5,
+    color: '#808080',
   },
 
 });
