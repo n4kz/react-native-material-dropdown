@@ -11,6 +11,7 @@ import {
   Platform,
   ViewPropTypes,
   I18nManager,
+  TextInput,
 } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 import { TextField } from 'react-native-material-textfield';
@@ -185,6 +186,8 @@ export default class Dropdown extends PureComponent {
       selected: -1,
       modal: false,
       value,
+      data: this.props.data,
+      searchText: undefined,
     };
   }
 
@@ -340,12 +343,14 @@ export default class Dropdown extends PureComponent {
 
   onSelect(index) {
     let {
-      data,
       valueExtractor,
       onChangeText,
       animationDuration,
       rippleDuration,
     } = this.props;
+
+    let data = this.state.data;
+
 
     let value = valueExtractor(data[index], index);
     let delay = Math.max(0, rippleDuration - animationDuration);
@@ -354,7 +359,10 @@ export default class Dropdown extends PureComponent {
       onChangeText(value, index, data);
     }
 
-    setTimeout(() => this.onClose(value), delay);
+    setTimeout(() => {
+      this.onClose(value);
+      this.setState({data: this.props.data});
+    }, delay);
   }
 
   onLayout(event) {
@@ -562,6 +570,18 @@ export default class Dropdown extends PureComponent {
     );
   }
 
+  searchFilterFunction(searchText) {
+
+    let arrayholder = this.props.data
+    const newData = arrayholder.filter(item => {
+    const itemData = `${item.value.toUpperCase()}`;
+    const textData = searchText.toUpperCase();
+       return itemData.indexOf(textData) > -1;
+    });
+    newData.push({value: searchText});
+    this.setState({ data: [...newData, {value: 'Unknown'}], searchText });
+  };
+
   renderItem({ item, index }) {
     if (null == item) {
       return null;
@@ -745,12 +765,23 @@ export default class Dropdown extends PureComponent {
             onResponderRelease={this.blur}
           >
             <View
-              style={[styles.picker, pickerStyle, pickerStyleOverrides]}
+              style={[styles.picker, pickerStyle, pickerStyleOverrides, {height: 200}]}
               onStartShouldSetResponder={() => true}
             >
+              <TextInput
+                style={styles.input}
+                placeholder={'Search here'}
+                placeholderTextColor="#808080"
+                clearButtonMode="always"
+                onSubmitEditing={() => {
+                  this.setState({value: this.state.searchText, modal: false})
+                }}
+                onChangeText={text => this.searchFilterFunction(text)}
+              />
+
               <FlatList
                 ref={this.updateScrollRef}
-                data={data}
+                data={this.state.data}
                 style={styles.scroll}
                 renderItem={this.renderItem}
                 keyExtractor={this.keyExtractor}

@@ -35,8 +35,6 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 1.0)',
     borderRadius: 2,
 
-    position: 'absolute',
-
     ...Platform.select({
       ios: {
         shadowRadius: 2,
@@ -56,11 +54,20 @@ export default StyleSheet.create({
   },
 
   scroll: {
-    flex: 1,
+    flex: 0.8,
     borderRadius: 2,
   },
 
   scrollContainer: {
     paddingVertical: 8,
   },
+
+  input: {
+    flex: 0.2,
+    height: 40,
+    margin: 12,
+    borderBottomWidth: 0.5,
+    color: '#808080',
+  },
+
 });
